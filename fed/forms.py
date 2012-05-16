@@ -3,7 +3,7 @@ from django import forms
 from models import Organizacion
 
 ANIOS = ((0, 'Todos'), (2009, 2009), (2010, 2010), (2011, 2011))
-ANIO_2 = ((0, u'Año'), (2010, 2010), (2011, 2011))
+ANIO_2 = ((0, u'Año'), (2010, 2010), (2011, 2011), (2012, 2012), (2013, 2013))
 
 class GralForm(forms.Form):
     year = forms.ChoiceField(choices=ANIOS, label=u'Elegir Año')
