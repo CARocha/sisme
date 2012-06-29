@@ -18,17 +18,17 @@
 	</ul>	
 	<div id="acciones-impulsadas-demandas">
 		<!-- Acciones publicas impulsadas por organizacion -->
-		{% with tabla=tabla_acciones_publicas titulo='Acciones públicas por organización' primer_td='Organización' colspan=5 titulo_combinado='Población discriminada' %}
+		{% with tabla=tabla_acciones_publicas titulo='Acciones públicas por organización' primer_td='Organización' colspan=6 titulo_combinado='Población discriminada' percent=1 aux=1%}
 		{% include "tabla_generica.html" %}
 		{% endwith %}
 		
 		<!-- Acciones publicas impulsadas por tipo de accion -->
-		{% with tabla=tabla_tipo_acciones titulo='Acciones públicas por tipo' primer_td='Tipo de acción' colspan=5 titulo_combinado='Población discriminada' %}
+		{% with tabla=tabla_tipo_acciones titulo='Acciones públicas por tipo' primer_td='Tipo de acción' colspan=6 titulo_combinado='Población discriminada' percent=1 aux=1%}
 		{% include "tabla_generica.html" %}
 		{% endwith %}
 		
 		<!-- Denuncias impulsadas -->
-		{% with tabla=tabla_denuncias titulo='Estado de denuncias impulsadas' primer_td='Denuncias en contra de la discriminación a personas ' colspan=3 titulo_combinado='Estado' %}
+		{% with tabla=tabla_denuncias titulo='Estado de denuncias impulsadas' primer_td='Denuncias en contra de la discriminación a personas ' colspan=4 titulo_combinado='Estado' percent=1 aux=1%}
 		{% include "tabla_generica.html" %}
 		{% endwith %}
 	</div>

@@ -41,6 +41,11 @@
 	        minWidth: 230
 	    });
 		orgs.multiselect("disable");
+		$("#id_temas").multiselect({
+	        noneSelectedText: 'Temas',
+	        selectedText: '# seleccionados',
+	        minWidth: 230
+	    });
 		$("#id_resultado").multiselect({
 	        noneSelectedText: 'Todos los resultados',
 	        selectedText: '# seleccionados',
@@ -111,6 +116,10 @@
 					<tr>
 						<th>{{form.organizacion.label_tag}}</th>
 						<td>{{form.organizacion}}</td>
+					</tr>
+					<tr>
+						<th>{{form.temas.label_tag}}</th>
+						<td>{{form.temas}}</td>
 					</tr>
 					<tr>
 						<th>{{form.resultado.label_tag}}</th>

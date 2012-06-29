@@ -33,12 +33,19 @@ def generales(request):
         orgs_2011 = Organizacion.objects.filter(proyecto__in=proyectos_filtrados, 
                                                 proyecto__modalidad=op[0], 
                                                 proyecto__fecha_inicio__year=2011).values_list('nombre_corto', flat=True)
+        orgs_2012 = Organizacion.objects.filter(proyecto__in=proyectos_filtrados, 
+                                                proyecto__modalidad=op[0], 
+                                                proyecto__fecha_inicio__year=2012).values_list('nombre_corto', flat=True)
         lista1 = list(set(orgs_2010))
         lista2 = list(set(orgs_2011))
+        lista3 = list(set(orgs_2012))
+
         total_orgs += len(lista1)
         total_orgs += len(lista2)
+        total_orgs += len(lista3)
         tabla_modalidad[op[1]] = {'cantidad1': len(lista1), '2010': lista1,
-                                  'cantidad2': len(lista2), '2011': lista2,}
+                                  'cantidad2': len(lista2), '2011': lista2,
+                                  'cantidad3': len(lista3), '2012': lista3,}
         
     #organizaciones por modalidad que han finalizado
     tabla_modalidad_finalizado = {}
@@ -101,10 +108,13 @@ def generales(request):
         lista = []
         for proyecto in proyectos_filtrados.filter(organizacion=org):
             for depa in Departamento.objects.filter(municipio__tematrabajo__proyecto=proyecto):
-                tabla_cobertura_municipios[org][depa.nombre] = Municipio.objects.filter(tematrabajo__proyecto=proyecto, 
+                tabla_cobertura_municipios[org][depa.nombre] = (Municipio.objects.filter(tematrabajo__proyecto=proyecto, 
                                                                                         departamento=depa).distinct().values_list('nombre', 
-                                                                                                                       flat=True)
-                
+                                                                                                                       flat=True),
+                                                            Municipio.objects.filter(tematrabajo__proyecto=proyecto, 
+                                                                                        departamento=depa).distinct().values_list('tematrabajo__tema__nombre', 
+                                                                                                                       flat=True))
+    print tabla_cobertura_municipios            
     #cobertura por temas
     temas = Tema.objects.all()
     tabla_temas = {}

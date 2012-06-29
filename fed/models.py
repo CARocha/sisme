@@ -135,11 +135,15 @@ class PoblacionMetaBase(models.Model):
         abstract = True
         
 class PoblacionMetaDirecta(PoblacionMetaBase):
+    alcanzada_hombre = models.IntegerField(null=True, blank=True)
+    alcanzada_mujer = models.IntegerField(null=True, blank=True)
     class Meta:
         verbose_name = u'Población Meta Directa'
         verbose_name_plural = u'Población Meta Directa'
     
 class PoblacionMetaIndirecta(PoblacionMetaBase):
+    alcanzada_hombre = models.IntegerField(null=True, blank=True)
+    alcanzada_mujer = models.IntegerField(null=True, blank=True)
     class Meta:
         verbose_name = u'Población Meta Indirecta'
         verbose_name_plural = u'Población Meta Indirecta'

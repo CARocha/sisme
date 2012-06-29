@@ -78,8 +78,8 @@
 					</tr>
 					<tr>
 						<td class="cantidad_org">2012</td>
-						<td></td>
-						<td></td>
+						<td class="cantidad_org">{{value.cantidad3}}</td>
+						<td>{% for org in value.2012 %}{{org}}{%if not forloop.last%}, {% endif %}{% endfor %}</td>
 					</tr>
 					{% endfor %}
 					<tr>
@@ -210,7 +210,9 @@
 					<tr>						
 						<th>Grupo Etareo</th>
 						<th>Hombre</th>
+						<th>Hombre alcazado</th>
 						<th>Mujer</th>
+						<th>Mujer alcanzado</th>
 						<th>Total</th>
 					</tr>
 				</thead>
@@ -223,7 +225,9 @@
 						{% if forloop.first %}<td rowspan="{{proyecto.poblacionmetadirecta_set.all.count}}">{{proyecto.nombre}}</td>{% endif %}
 						<td>{{grupoetareo.get_grupo_etareo_display}}</td>						
 						<td>{{grupoetareo.hombres}}</td>
+						<td>{{grupoetareo.alcanzada_hombre}}</td>
 						<td>{{grupoetareo.mujeres}}</td>
+						<td>{{grupoetareo.alcanzada_mujer}}</td>
 						<td>{{grupoetareo.get_total}}</td>
 					</tr>
 					{% endfor %}
@@ -241,7 +245,9 @@
 					<tr>						
 						<th>Grupo Etareo</th>
 						<th>Hombre</th>
+						<th>Hombre alcanzado</th>
 						<th>Mujer</th>
+						<th>Mujer alcanzado</th>
 						<th>Total</th>
 					</tr>
 				</thead>
@@ -255,7 +261,9 @@
 						{% if forloop.first %}<td rowspan="{{poblacion.count}}">{{proyecto.nombre}}</td>{% endif %}
 						<td>{{grupoetareo.get_grupo_etareo_display}}</td>						
 						<td>{{grupoetareo.hombres}}</td>
+						<td>{{grupoetareo.alcanzada_hombre}}</td>
 						<td>{{grupoetareo.mujeres}}</td>
+						<td>{{grupoetareo.alcanzada_mujer}}</td>
 						<td>{{grupoetareo.get_total}}</td>
 					</tr>
 					{% endfor %}
@@ -349,6 +357,7 @@
 						<th>Nombre de la organización</th>
 						<th>Departamentos</th>
 						<th>Municipios</th>
+						<th>Temas</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -357,7 +366,8 @@
 					<tr>
 						{% if forloop.first %}<td rowspan="{{value|length}}">{{key}}</td>{% endif %}						
 						<td>{{k}}</td>																		
-						<td>{{v|join:", "}}</td>						
+						<td>{{v.0|join:", "}}</td>
+						<td>{{v.1|join:", "}}</td>						
 					</tr>
 					{% endfor %}
 					{% endfor %}

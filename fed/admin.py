@@ -21,10 +21,12 @@ class TemaTrabajoInline(admin.TabularInline):
     
 class PoblacionMetaDirectaInline(admin.TabularInline):        
     model = PoblacionMetaDirecta
+    fields = ['grupo_etareo', 'hombres', 'alcanzada_hombre', 'mujeres', 'alcanzada_mujer']
     extra = 1
     
 class PoblacionMetaIndirectaInline(admin.TabularInline):        
     model = PoblacionMetaIndirecta
+    fields = ['grupo_etareo', 'hombres', 'alcanzada_hombre', 'mujeres', 'alcanzada_mujer']
     extra = 1
     
 class ProyectoAdmin(BaseAdmin):

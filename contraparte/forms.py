@@ -14,11 +14,12 @@ MONTH_CHOICES = (('', 'Mes'),
                  (9, 'Septiembre'), (10, 'Octubre'),
                  (11, 'Noviembre'), (12, 'Diciembre'))
 
-ANIOS_CHOICE = (('', u'Año'), (2010, 2010), (2011, 2011), (2012, 2012), )
+ANIOS_CHOICE = (('', u'Año'), (2010, 2010), (2011, 2011), (2012, 2012), (2013, 2013),)
 
 class InfluenciaForm(forms.Form):
     modalidad = forms.MultipleChoiceField(choices=MODALIDAD_CHOICE, label='Modalidad de apoyo', required=False)
     organizacion = forms.ModelMultipleChoiceField(queryset=Organizacion.objects.all(), label='Organizaciones', required=False)
+    temas = forms.ModelMultipleChoiceField(queryset=Tema.objects.all(), label='Temas', required=False)
     resultado = forms.ModelMultipleChoiceField(queryset=Resultado.objects.all().exclude(id=7), label='Resultados', required=False)
     meses = forms.MultipleChoiceField(choices=MONTH_CHOICES, error_messages={'required': 'Seleccione al menos un mes'})    
     anio = forms.ChoiceField(choices=ANIOS_CHOICE, error_messages={'required': u'Seleccione un año'})
