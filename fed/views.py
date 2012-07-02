@@ -113,8 +113,7 @@ def generales(request):
                                                                                                                        flat=True),
                                                             Municipio.objects.filter(tematrabajo__proyecto=proyecto, 
                                                                                         departamento=depa).distinct().values_list('tematrabajo__tema__nombre', 
-                                                                                                                       flat=True))
-    print tabla_cobertura_municipios            
+                                                                                                                       flat=True))         
     #cobertura por temas
     temas = Tema.objects.all()
     tabla_temas = {}
