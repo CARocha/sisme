@@ -13,6 +13,7 @@ def indicadores(request):
         if form.is_valid():
             request.session['modalidad'] = form.cleaned_data['modalidad']
             request.session['organizacion'] = form.cleaned_data['organizacion']
+            request.session['temas'] = form.cleaned_data['temas']
             request.session['resultado'] = form.cleaned_data['resultado']
             request.session['meses'] = form.cleaned_data['meses']
             request.session['anio'] = form.cleaned_data['anio']            
