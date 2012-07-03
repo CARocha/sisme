@@ -16,6 +16,7 @@
 	<ul>
 		<li><a href="#acciones-impulsadas"><span>Acciones impulsadas Prevención VBG</span></a></li>				
 		<li><a href="#masculinidad-libre"><span>Promoción de masculinidad libre</span></a></li>
+		<li><a href="#acciones-impulsadas-organizacion"><span>Acciones impulsadas VBG por organización</span></a></li>
 <!-- 		<li><a href="#informacion-vih"><span>Personas que reciben información sobre VIH</span></a></li>						 -->
 	</ul>
 	<div id="acciones-impulsadas">
@@ -35,6 +36,14 @@
 		{% endwith %}	
 	{% endfor %}	
 	{% endfor %}
-	</div>			
+	</div>
+	<div id="acciones-impulsadas-organizacion">
+	{%comment%}{% for k,v in resultados_organizacion.items%}
+	 {% with tabla=v titulo='organizacio' primer_td='Acciones' colspan=11 titulo_combinado='participantes mujeres' percent=1 aux=1 %}
+		{% include "tabla_generica.html" %}
+		{% endwith %}
+	{%endfor%} {%endcomment%}
+	{{resultados_organizacion}}
+	</div>		
 </div>	
 {% endblock %}

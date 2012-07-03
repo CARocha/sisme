@@ -177,6 +177,33 @@ def demandando_justicia(request):
                                                                                tipo_poblacion=poblacion[0], \
                                                                                situacion=situacion[0]).count() for situacion in DENUNCIAS}
     
+    tabla_denuncias_lgbt = {}
+    for organizacion in Informe.objects.all():
+        tabla_denuncias_lgbt[organizacion.organizacion] = {situacion[1]: Denuncia.objects.filter(informe__in=informes, \
+                                                                               tipo_poblacion=1, \
+                                                                               informe__organizacion=organizacion.organizacion, \
+                                                                               situacion=situacion[0]).count() for situacion in DENUNCIAS}
+
+    tabla_denuncias_discapasitado = {}
+    for organizacion in Informe.objects.all():
+        tabla_denuncias_discapasitado[organizacion.organizacion] = {situacion[1]: Denuncia.objects.filter(informe__in=informes, \
+                                                                               tipo_poblacion=2, \
+                                                                               informe__organizacion=organizacion.organizacion, \
+                                                                               situacion=situacion[0]).count() for situacion in DENUNCIAS}
+
+    tabla_denuncias_vih = {}
+    for organizacion in Informe.objects.all():
+        tabla_denuncias_vih[organizacion.organizacion] = {situacion[1]: Denuncia.objects.filter(informe__in=informes, \
+                                                                               tipo_poblacion=3, \
+                                                                               informe__organizacion=organizacion.organizacion, \
+                                                                               situacion=situacion[0]).count() for situacion in DENUNCIAS}                                                                                
+    
+    tabla_denuncias_etnias = {}
+    for organizacion in Informe.objects.all():
+        tabla_denuncias_etnias[organizacion.organizacion] = {situacion[1]: Denuncia.objects.filter(informe__in=informes, \
+                                                                               tipo_poblacion=4, \
+                                                                               informe__organizacion=organizacion.organizacion, \
+                                                                               situacion=situacion[0]).count() for situacion in DENUNCIAS}
     return render_to_response('contraparte/demandando_justicia.html', RequestContext(request, locals()))
 
 #----------------------- Resultado 2.1 --------------------------------------
@@ -265,7 +292,30 @@ def prevencion_violencia(request):
             for accion in ACCION_PREVENCION:
                 query = PrevencionVBG.objects.filter(informe__in=informes, tipo_accion=accion[0])
                 resultados[grupo][k][accion[1]] = {key: check_none(query.aggregate(campo_sum=Sum(field))['campo_sum']) for key, field in campos.items()}
-                
+    
+    # resultados_organizacion = {}
+    # for grupo, valores in dicc.items():
+    #   for obj in Informe.objects.all():
+    #     resultados_organizacion[obj.organizacion] = {}
+    #     for k, campos in valores.items():
+    #       resultados_organizacion[obj.organizacion][k] = {}
+    #       for acciones in ACCION_PREVENCION:
+    #         query = PrevencionVBG.objects.filter(informe__in=informes, 
+    #                                          tipo_accion=acciones[0],
+    #                                          informe__organizacion=obj.organizacion)
+    #         resultados_organizacion[obj.organizacion][k][acciones[1]] = todo = sum(check_none(query.aggregate(campo_sum=Sum(field))['campo_sum']) for key, field in campos.items())
+    resultados_organizacion = {}
+    for organizacion in Informe.objects.all():
+        resultados_organizacion[organizacion.organizacion] = {}
+        for accion in ACCION_PREVENCION:
+          query = PrevencionVBG.objects.filter(informe__in=informes,
+                                               tipo_accion=accion[0],
+                                               informe__organizacion=organizacion.organizacion)
+          resultados_organizacion[organizacion.organizacion] = {accion[1]: query.aggregate(uno=Sum('muj_ninas'),
+                                                                                 dos=Sum('muj_adols'),
+                                                                                 tres=Sum('muj_jovenes'),
+                                                                                 cuatro=Sum('muj_adultas')) }
+
     resultados_2 = {}
     for grupo, valores in dicc.items():
         resultados_2[grupo] = {}

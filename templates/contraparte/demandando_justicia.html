@@ -14,7 +14,11 @@
 {% block content %}
 <div id="tabs" style="font-size: 70%;">
 	<ul>
-		<li><a href="#acciones-impulsadas-demandas"><span>Acciones públicas</span></a></li>				
+		<li><a href="#acciones-impulsadas-demandas"><span>Acciones públicas</span></a></li>
+		<li><a href="#acciones-denuncia-lgbt"><span>Denuncias discriminacion LGBT</span></a></li>
+		<li><a href="#acciones-denuncia-discapasitado"><span>Denuncias discriminacion Discapasitados</span></a></li>
+		<li><a href="#acciones-denuncia-vih"><span>Denuncias discriminacion VIH</span></a></li>
+		<li><a href="#acciones-denuncia-etnias"><span>Denuncias discriminacion Étnias o Indígenas</span></a></li>				
 	</ul>	
 	<div id="acciones-impulsadas-demandas">
 		<!-- Acciones publicas impulsadas por organizacion -->
@@ -29,6 +33,30 @@
 		
 		<!-- Denuncias impulsadas -->
 		{% with tabla=tabla_denuncias titulo='Estado de denuncias impulsadas' primer_td='Denuncias en contra de la discriminación a personas ' colspan=4 titulo_combinado='Estado' percent=1 aux=1%}
+		{% include "tabla_generica.html" %}
+		{% endwith %}
+	</div>
+	<div id="acciones-denuncia-lgbt">
+		<!-- Denuncias por lgbt -->
+		{% with tabla=tabla_denuncias_lgbt titulo='Estado de denuncias impulsadas por organización' primer_td='Organizaciones' colspan=4 titulo_combinado='Estado en LGBT' percent=1 aux=1%}
+		{% include "tabla_generica.html" %}
+		{% endwith %}
+	</div>
+	<div id="acciones-denuncia-discapasitado">
+		<!-- Denuncias por lgbt -->
+		{% with tabla=tabla_denuncias_discapasitado titulo='Estado de denuncias impulsadas por organización' primer_td='Organizaciones' colspan=4 titulo_combinado='Estado en Discapasitados' percent=1 aux=1%}
+		{% include "tabla_generica.html" %}
+		{% endwith %}
+	</div>
+	<div id="acciones-denuncia-vih">
+		<!-- Denuncias por lgbt -->
+		{% with tabla=tabla_denuncias_vih titulo='Estado de denuncias impulsadas por organización' primer_td='Organizaciones' colspan=4 titulo_combinado='Estado en VIH' percent=1 aux=1%}
+		{% include "tabla_generica.html" %}
+		{% endwith %}
+	</div>
+	<div id="acciones-denuncia-etnias">
+		<!-- Denuncias por lgbt -->
+		{% with tabla=tabla_denuncias_etnias titulo='Estado de denuncias impulsadas por organización' primer_td='Organizaciones' colspan=4 titulo_combinado='Estado en etnias o indigenas' percent=1 aux=1%}
 		{% include "tabla_generica.html" %}
 		{% endwith %}
 	</div>
