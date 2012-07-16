@@ -38,12 +38,254 @@
 	{% endfor %}
 	</div>
 	<div id="acciones-impulsadas-organizacion">
-	{%comment%}{% for k,v in resultados_organizacion.items%}
-	 {% with tabla=v titulo='organizacio' primer_td='Acciones' colspan=11 titulo_combinado='participantes mujeres' percent=1 aux=1 %}
-		{% include "tabla_generica.html" %}
-		{% endwith %}
-	{%endfor%} {%endcomment%}
-	{{resultados_organizacion}}
+	<table width="100%">
+		<caption>Participantes mujeres</caption>
+		<thead>
+			<th>Organización</th>
+			<th>TALLERES</th>
+			<th>INTERCAMBIOS DE EXPERIENCIAS</th>
+			<th>ARTÍCULOS DE PERIÓDICOS</th>
+			<th>CAMPAÑAS EN TELEVISIÓN</th>
+			<th>CAMPAÑAS RADIALES</th>
+			<th>MATERIALES EDUCATIVOS</th>
+			<th>VISITAS GRUPALES O INDIVIDUALES</th>
+			<th>REUNIONES CON AUTORIDADES</th>
+			<th>FOROS</th>
+			<th>CONSEJERIA Y PROMOTORIA SOCIAL</th>
+		</thead>
+		<tbody>
+		{%for k,v in participantes_mujeres.items%}
+		<tr>
+			<td>{{k}}</td>
+			{%for key, value in v.items%}
+				<td>{{value.0}}</td>
+			{%endfor%}
+		</tr>
+		{%endfor%}
+		</tbody>					
+	</table>
+	<br><br>
+	<table width="100%">
+		<caption>Participantes hombres</caption>
+		<thead>
+			<th>Organización</th>
+			<th>TALLERES</th>
+			<th>INTERCAMBIOS DE EXPERIENCIAS</th>
+			<th>ARTÍCULOS DE PERIÓDICOS</th>
+			<th>CAMPAÑAS EN TELEVISIÓN</th>
+			<th>CAMPAÑAS RADIALES</th>
+			<th>MATERIALES EDUCATIVOS</th>
+			<th>VISITAS GRUPALES O INDIVIDUALES</th>
+			<th>REUNIONES CON AUTORIDADES</th>
+			<th>FOROS</th>
+			<th>CONSEJERIA Y PROMOTORIA SOCIAL</th>
+		</thead>
+		<tbody>
+		{%for k,v in participantes_hombres.items%}
+		<tr>
+			<td>{{k}}</td>
+			{%for key, value in v.items%}
+				<td>{{value.0}}</td>
+			{%endfor%}
+		</tr>
+		{%endfor%}
+		</tbody>					
+	</table>
+	<br><br>
+	<table width="100%">
+		<caption>Participantes LGBT</caption>
+		<thead>
+			<th>Organización</th>
+			<th>TALLERES</th>
+			<th>INTERCAMBIOS DE EXPERIENCIAS</th>
+			<th>ARTÍCULOS DE PERIÓDICOS</th>
+			<th>CAMPAÑAS EN TELEVISIÓN</th>
+			<th>CAMPAÑAS RADIALES</th>
+			<th>MATERIALES EDUCATIVOS</th>
+			<th>VISITAS GRUPALES O INDIVIDUALES</th>
+			<th>REUNIONES CON AUTORIDADES</th>
+			<th>FOROS</th>
+			<th>CONSEJERIA Y PROMOTORIA SOCIAL</th>
+		</thead>
+		<tbody>
+		{%for k,v in participanteslgbt.items%}
+		<tr>
+			<td>{{k}}</td>
+			{%for key, value in v.items%}
+				<td>{{value.0}}</td>
+			{%endfor%}
+		</tr>
+		{%endfor%}
+		</tbody>					
+	</table>
+	<br><br>
+	<table width="100%">
+		<caption>Hombres discapasitados</caption>
+		<thead>
+			<th>Organización</th>
+			<th>TALLERES</th>
+			<th>INTERCAMBIOS DE EXPERIENCIAS</th>
+			<th>ARTÍCULOS DE PERIÓDICOS</th>
+			<th>CAMPAÑAS EN TELEVISIÓN</th>
+			<th>CAMPAÑAS RADIALES</th>
+			<th>MATERIALES EDUCATIVOS</th>
+			<th>VISITAS GRUPALES O INDIVIDUALES</th>
+			<th>REUNIONES CON AUTORIDADES</th>
+			<th>FOROS</th>
+			<th>CONSEJERIA Y PROMOTORIA SOCIAL</th>
+		</thead>
+		<tbody>
+		{%for k,v in hombresdiscapacitados.items%}
+		<tr>
+			<td>{{k}}</td>
+			{%for key, value in v.items%}
+				<td>{{value.0}}</td>
+			{%endfor%}
+		</tr>
+		{%endfor%}
+		</tbody>					
+	</table>
+
+	<br><br>
+	<table width="100%">
+		<caption>Mujeres discapasitadas</caption>
+		<thead>
+			<th>Organización</th>
+			<th>TALLERES</th>
+			<th>INTERCAMBIOS DE EXPERIENCIAS</th>
+			<th>ARTÍCULOS DE PERIÓDICOS</th>
+			<th>CAMPAÑAS EN TELEVISIÓN</th>
+			<th>CAMPAÑAS RADIALES</th>
+			<th>MATERIALES EDUCATIVOS</th>
+			<th>VISITAS GRUPALES O INDIVIDUALES</th>
+			<th>REUNIONES CON AUTORIDADES</th>
+			<th>FOROS</th>
+			<th>CONSEJERIA Y PROMOTORIA SOCIAL</th>
+		</thead>
+		<tbody>
+		{%for k,v in mujeresdiscapacitadas.items%}
+		<tr>
+			<td>{{k}}</td>
+			{%for key, value in v.items%}
+				<td>{{value.0}}</td>
+			{%endfor%}
+		</tr>
+		{%endfor%}
+		</tbody>					
+	</table>
+
+	<br><br>
+	<table width="100%">
+		<caption>Hombres poblacion étnicos</caption>
+		<thead>
+			<th>Organización</th>
+			<th>TALLERES</th>
+			<th>INTERCAMBIOS DE EXPERIENCIAS</th>
+			<th>ARTÍCULOS DE PERIÓDICOS</th>
+			<th>CAMPAÑAS EN TELEVISIÓN</th>
+			<th>CAMPAÑAS RADIALES</th>
+			<th>MATERIALES EDUCATIVOS</th>
+			<th>VISITAS GRUPALES O INDIVIDUALES</th>
+			<th>REUNIONES CON AUTORIDADES</th>
+			<th>FOROS</th>
+			<th>CONSEJERIA Y PROMOTORIA SOCIAL</th>
+		</thead>
+		<tbody>
+		{%for k,v in hombre_poblacionetnias.items%}
+		<tr>
+			<td>{{k}}</td>
+			{%for key, value in v.items%}
+				<td>{{value.0}}</td>
+			{%endfor%}
+		</tr>
+		{%endfor%}
+		</tbody>					
+	</table>
+
+	<br><br>
+	<table width="100%">
+		<caption>Mujeres poblacion étnicas</caption>
+		<thead>
+			<th>Organización</th>
+			<th>TALLERES</th>
+			<th>INTERCAMBIOS DE EXPERIENCIAS</th>
+			<th>ARTÍCULOS DE PERIÓDICOS</th>
+			<th>CAMPAÑAS EN TELEVISIÓN</th>
+			<th>CAMPAÑAS RADIALES</th>
+			<th>MATERIALES EDUCATIVOS</th>
+			<th>VISITAS GRUPALES O INDIVIDUALES</th>
+			<th>REUNIONES CON AUTORIDADES</th>
+			<th>FOROS</th>
+			<th>CONSEJERIA Y PROMOTORIA SOCIAL</th>
+		</thead>
+		<tbody>
+		{%for k,v in mujeres_poblacionetnias.items%}
+		<tr>
+			<td>{{k}}</td>
+			{%for key, value in v.items%}
+				<td>{{value.0}}</td>
+			{%endfor%}
+		</tr>
+		{%endfor%}
+		</tbody>					
+	</table>
+
+	<br><br>
+	<table width="100%">
+		<caption>Hombres con VIH</caption>
+		<thead>
+			<th>Organización</th>
+			<th>TALLERES</th>
+			<th>INTERCAMBIOS DE EXPERIENCIAS</th>
+			<th>ARTÍCULOS DE PERIÓDICOS</th>
+			<th>CAMPAÑAS EN TELEVISIÓN</th>
+			<th>CAMPAÑAS RADIALES</th>
+			<th>MATERIALES EDUCATIVOS</th>
+			<th>VISITAS GRUPALES O INDIVIDUALES</th>
+			<th>REUNIONES CON AUTORIDADES</th>
+			<th>FOROS</th>
+			<th>CONSEJERIA Y PROMOTORIA SOCIAL</th>
+		</thead>
+		<tbody>
+		{%for k,v in hombrevih.items%}
+		<tr>
+			<td>{{k}}</td>
+			{%for key, value in v.items%}
+				<td>{{value.0}}</td>
+			{%endfor%}
+		</tr>
+		{%endfor%}
+		</tbody>					
+	</table>
+
+	<br><br>
+	<table width="100%">
+		<caption>Mujeres con VIH</caption>
+		<thead>
+			<th>Organización</th>
+			<th>TALLERES</th>
+			<th>INTERCAMBIOS DE EXPERIENCIAS</th>
+			<th>ARTÍCULOS DE PERIÓDICOS</th>
+			<th>CAMPAÑAS EN TELEVISIÓN</th>
+			<th>CAMPAÑAS RADIALES</th>
+			<th>MATERIALES EDUCATIVOS</th>
+			<th>VISITAS GRUPALES O INDIVIDUALES</th>
+			<th>REUNIONES CON AUTORIDADES</th>
+			<th>FOROS</th>
+			<th>CONSEJERIA Y PROMOTORIA SOCIAL</th>
+		</thead>
+		<tbody>
+		{%for k,v in mujervih.items%}
+		<tr>
+			<td>{{k}}</td>
+			{%for key, value in v.items%}
+				<td>{{value.0}}</td>
+			{%endfor%}
+		</tr>
+		{%endfor%}
+		</tbody>					
+	</table>
+
 	</div>		
 </div>	
 {% endblock %}

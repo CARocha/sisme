@@ -293,7 +293,7 @@ def prevencion_violencia(request):
                 query = PrevencionVBG.objects.filter(informe__in=informes, tipo_accion=accion[0])
                 resultados[grupo][k][accion[1]] = {key: check_none(query.aggregate(campo_sum=Sum(field))['campo_sum']) for key, field in campos.items()}
     
-    # resultados_organizacion = {}
+    #resultados_organizacion = {}
     # for grupo, valores in dicc.items():
     #   for obj in Informe.objects.all():
     #     resultados_organizacion[obj.organizacion] = {}
@@ -303,18 +303,87 @@ def prevencion_violencia(request):
     #         query = PrevencionVBG.objects.filter(informe__in=informes, 
     #                                          tipo_accion=acciones[0],
     #                                          informe__organizacion=obj.organizacion)
-    #         resultados_organizacion[obj.organizacion][k][acciones[1]] = todo = sum(check_none(query.aggregate(campo_sum=Sum(field))['campo_sum']) for key, field in campos.items())
-    resultados_organizacion = {}
+    #         resultados_organizacion[obj.organizacion][k][acciones[1]] = [a.suma_participacion_mujeres() for a in query]
+    participantes_mujeres = {}
     for organizacion in Informe.objects.all():
-        resultados_organizacion[organizacion.organizacion] = {}
+        participantes_mujeres[organizacion.organizacion] = {}
         for accion in ACCION_PREVENCION:
           query = PrevencionVBG.objects.filter(informe__in=informes,
                                                tipo_accion=accion[0],
                                                informe__organizacion=organizacion.organizacion)
-          resultados_organizacion[organizacion.organizacion] = {accion[1]: query.aggregate(uno=Sum('muj_ninas'),
-                                                                                 dos=Sum('muj_adols'),
-                                                                                 tres=Sum('muj_jovenes'),
-                                                                                 cuatro=Sum('muj_adultas')) }
+          participantes_mujeres[organizacion.organizacion][accion[1]] = [int(a.suma_participacion_mujeres()) for a in query]
+
+    participantes_hombres = {}
+    for organizacion in Informe.objects.all():
+        participantes_hombres[organizacion.organizacion] = {}
+        for accion in ACCION_PREVENCION:
+          query = PrevencionVBG.objects.filter(informe__in=informes,
+                                               tipo_accion=accion[0],
+                                               informe__organizacion=organizacion.organizacion)
+          participantes_hombres[organizacion.organizacion][accion[1]] = [int(a.suma_participante_hombres()) for a in query]
+
+    participanteslgbt = {}
+    for organizacion in Informe.objects.all():
+        participanteslgbt[organizacion.organizacion] = {}
+        for accion in ACCION_PREVENCION:
+          query = PrevencionVBG.objects.filter(informe__in=informes,
+                                               tipo_accion=accion[0],
+                                               informe__organizacion=organizacion.organizacion)
+          participanteslgbt[organizacion.organizacion][accion[1]] = [int(a.participantes_lgbt()) for a in query]
+
+    hombresdiscapacitados = {}
+    for organizacion in Informe.objects.all():
+        hombresdiscapacitados[organizacion.organizacion] = {}
+        for accion in ACCION_PREVENCION:
+          query = PrevencionVBG.objects.filter(informe__in=informes,
+                                               tipo_accion=accion[0],
+                                               informe__organizacion=organizacion.organizacion)
+          hombresdiscapacitados[organizacion.organizacion][accion[1]] = [int(a.hombres_discapacitados()) for a in query]  
+
+    mujeresdiscapacitadas = {}
+    for organizacion in Informe.objects.all():
+        mujeresdiscapacitadas[organizacion.organizacion] = {}
+        for accion in ACCION_PREVENCION:
+          query = PrevencionVBG.objects.filter(informe__in=informes,
+                                               tipo_accion=accion[0],
+                                               informe__organizacion=organizacion.organizacion)
+          mujeresdiscapacitadas[organizacion.organizacion][accion[1]] = [int(a.mujeres_discapacitadas()) for a in query]
+
+    hombre_poblacionetnias = {}
+    for organizacion in Informe.objects.all():
+        hombre_poblacionetnias[organizacion.organizacion] = {}
+        for accion in ACCION_PREVENCION:
+          query = PrevencionVBG.objects.filter(informe__in=informes,
+                                               tipo_accion=accion[0],
+                                               informe__organizacion=organizacion.organizacion)
+          hombre_poblacionetnias[organizacion.organizacion][accion[1]] = [int(a.hombre_poblacion_etnias()) for a in query]          
+    
+    mujeres_poblacionetnias = {}
+    for organizacion in Informe.objects.all():
+        mujeres_poblacionetnias[organizacion.organizacion] = {}
+        for accion in ACCION_PREVENCION:
+          query = PrevencionVBG.objects.filter(informe__in=informes,
+                                               tipo_accion=accion[0],
+                                               informe__organizacion=organizacion.organizacion)
+          mujeres_poblacionetnias[organizacion.organizacion][accion[1]] = [int(a.mujeres_poblacion_etnias()) for a in query]
+
+    hombrevih = {}
+    for organizacion in Informe.objects.all():
+        hombrevih[organizacion.organizacion] = {}
+        for accion in ACCION_PREVENCION:
+          query = PrevencionVBG.objects.filter(informe__in=informes,
+                                               tipo_accion=accion[0],
+                                               informe__organizacion=organizacion.organizacion)
+          hombrevih[organizacion.organizacion][accion[1]] = [int(a.hombre_vih()) for a in query]
+
+    mujervih = {}
+    for organizacion in Informe.objects.all():
+        mujervih[organizacion.organizacion] = {}
+        for accion in ACCION_PREVENCION:
+          query = PrevencionVBG.objects.filter(informe__in=informes,
+                                               tipo_accion=accion[0],
+                                               informe__organizacion=organizacion.organizacion)
+          mujervih[organizacion.organizacion][accion[1]] = [int(a.mujeres_vih()) for a in query]
 
     resultados_2 = {}
     for grupo, valores in dicc.items():

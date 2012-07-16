@@ -411,6 +411,26 @@ class BaseR22(models.Model):
 
 class PrevencionVBG(BaseR22):    
     
+
+    def suma_participacion_mujeres(self):
+        return self.muj_ninas + self.muj_adols + self.muj_jovenes + self.muj_adultas
+    def suma_participante_hombres(self):
+        return self.hom_ninos + self.hom_adols + self.hom_jovenes + self.hom_adultos
+    def participantes_lgbt(self):
+        return self.lgbt_trans + self.lgbt_lesbi + self.lgbt_gay + self.lgbt_hsh
+    def hombres_discapacitados(self):
+        return self.hom_disca_ninos + self.hom_disca_adols + self.hom_disca_jovenes + self.hom_disca_adultos
+    def mujeres_discapacitadas(self):
+        return self.muj_disca_ninas + self.muj_disca_adols + self.muj_disca_jovenes + self.muj_disca_adultas
+    def hombre_poblacion_etnias(self):
+        return self.hom_etnia_ninos + self.hom_etnia_adols + self.hom_etnia_jovenes + self.hom_etnia_adultos
+    def mujeres_poblacion_etnias(self):
+        return self.muj_etnia_ninas + self.muj_etnia_adols + self.muj_etnia_jovenes + self.muj_etnia_adultas
+    def hombre_vih(self):
+        return self.hom_vih_ninos + self.hom_vih_adols + self.hom_vih_jovenes + self.hom_vih_adultos
+    def mujeres_vih(self):
+        return self.muj_vih_ninas + self.muj_vih_adols + self.muj_vih_jovenes + self.muj_vih_adultas
+
     class Meta:
         verbose_name = u'Prevención de VBG'
         verbose_name_plural = u'Prevención de VBG'
