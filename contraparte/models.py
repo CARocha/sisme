@@ -429,7 +429,8 @@ class PrevencionVBG(BaseR22):
     def hombre_vih(self):
         return self.hom_vih_ninos + self.hom_vih_adols + self.hom_vih_jovenes + self.hom_vih_adultos
     def mujeres_vih(self):
-        return self.muj_vih_ninas + self.muj_vih_adols + self.muj_vih_jovenes + self.muj_vih_adultas
+        total = self.muj_vih_ninas + self.muj_vih_adols + self.muj_vih_jovenes + self.muj_vih_adultas
+        return total
 
     class Meta:
         verbose_name = u'Prevención de VBG'

@@ -1,0 +1,48 @@
+{%extends "base.html"%}
+{% block title %}Prevención de Violencia por Organización{% endblock %}
+
+{% load tools %}
+
+{%block content%}
+<table width="100%">
+		<caption>Participantes mujeres étnias</caption>
+		<thead>
+			<th>Organización</th>
+			<th>TALLERES</th>
+			<th>INTERCAMBIOS DE EXPERIENCIAS</th>
+			<th>ARTÍCULOS DE PERIÓDICOS</th>
+			<th>CAMPAÑAS EN TELEVISIÓN</th>
+			<th>CAMPAÑAS RADIALES</th>
+			<th>MATERIALES EDUCATIVOS</th>
+			<th>VISITAS GRUPALES O INDIVIDUALES</th>
+			<th>REUNIONES CON AUTORIDADES</th>
+			<th>FOROS</th>
+			<th>CONSEJERIA Y PROMOTORIA SOCIAL</th>
+			<th>TOTAL</th>
+			<th>%</th>
+		</thead>
+		<tbody>
+		{%for k,v in mujeres_poblacionetnias.items%}
+		<tr>
+			<td>{{k}}</td>
+			{%for key, value in v.items%}
+				<td>{{value}}</td>
+			{%endfor%}
+			<td>{{v|total_dict}}</td>
+			{% with total=v|total_dict %}
+					<td>{{total|frecuencia:mujeres_poblacionetnias}}</td>
+			{% endwith %}
+		</tr>
+		{%endfor%}
+		<tr>
+				<td class="negrita">Total</td>
+				{% for key, value in mujeres_poblacionetnias.items|slice:":1" %}
+				{% for k in value.keys %}
+				<td>{{mujeres_poblacionetnias|total_per_key:k}}</td>
+				{% endfor %}
+				{% endfor %}				
+				<td>{{mujeres_poblacionetnias|total_general}}</td>								
+			</tr>	
+		</tbody>					
+</table>
+{%endblock%}
