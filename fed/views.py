@@ -122,8 +122,18 @@ def generales(request):
         for tematrabajo in TemaTrabajo.objects.filter(tema=tema, proyecto__in=proyectos_filtrados):
             for municipio in tematrabajo.municipio.all():
                 lista.append(municipio)
-        tabla_temas[tema] = list(set(lista))              
-    
+        tabla_temas[tema] = list(set(lista))
+
+    tabla_activos = {}
+
+    for obj in MODALIDAD_CHOICE:
+        actual = Organizacion.objects.filter(proyecto__modalidad=obj[0], \
+                                             proyecto__proyecto_activo=2).values_list('nombre_corto', flat=True)          
+        lista1 = list(set(actual))
+
+        tabla_activos[obj[1]] = {'cantidad1': len(lista1), '2012': lista1,
+                                }
+
     return render_to_response("fed/generales.html", RequestContext(request, locals()))
 
 
