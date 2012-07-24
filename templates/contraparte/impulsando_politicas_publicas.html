@@ -54,6 +54,12 @@
 		{% with tabla=tabla_comision_estado titulo='Efectividad de las acciones promovidas en las diferentes instancias' primer_td='Tipo de comisiones' colspan=4 titulo_combinado='Estado de accion' percent=1 aux=1%}
 		{% include "tabla_generica.html" %}
 		{% endwith %}
+
+		<!-- participacion en comision pero a nivel global por proyecto -->
+		{% with tabla=tabla_comisiones_extra titulo='Participación en comisiones para incidir sobre toma de decisiones sobre DDSSRR y equidad' primer_td='Tipo de comisiones' colspan=7 titulo_combinado='Estado de accion' percent=1 aux=1%}
+		{% include "tabla_generica.html" %}
+		{% endwith %}
+
 	</div>
 	<div id="defensa-ddssrr">
 		<!-- Acciones para defensa de los DDSSRR -->

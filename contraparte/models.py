@@ -437,7 +437,26 @@ class PrevencionVBG(BaseR22):
         verbose_name_plural = u'Prevención de VBG'
     
 class MasculinidadLibre(BaseR22):
-        
+    
+    def participacion_mujeres_mas(self):
+        return self.muj_ninas + self.muj_adols + self.muj_jovenes + self.muj_adultas
+    def participante_hombres_mas(self):
+        return self.hom_ninos + self.hom_adols + self.hom_jovenes + self.hom_adultos
+    def participantes_lgbt_mas(self):
+        return self.lgbt_trans + self.lgbt_lesbi + self.lgbt_gay + self.lgbt_hsh
+    def hombres_discapacitados_mas(self):
+        return self.hom_disca_ninos + self.hom_disca_adols + self.hom_disca_jovenes + self.hom_disca_adultos
+    def mujeres_discapacitadas_mas(self):
+        return self.muj_disca_ninas + self.muj_disca_adols + self.muj_disca_jovenes + self.muj_disca_adultas
+    def hombre_poblacion_etnias_mas(self):
+        return self.hom_etnia_ninos + self.hom_etnia_adols + self.hom_etnia_jovenes + self.hom_etnia_adultos
+    def mujeres_poblacion_etnias_mas(self):
+        return self.muj_etnia_ninas + self.muj_etnia_adols + self.muj_etnia_jovenes + self.muj_etnia_adultas
+    def hombre_vih_mas(self):
+        return self.hom_vih_ninos + self.hom_vih_adols + self.hom_vih_jovenes + self.hom_vih_adultos
+    def mujeres_vih_mas(self):
+        total = self.muj_vih_ninas + self.muj_vih_adols + self.muj_vih_jovenes + self.muj_vih_adultas
+        return total    
     class Meta:
         verbose_name = u'Masculinidad Libre'
         verbose_name_plural = u'Masculinidad Libre'

@@ -102,8 +102,8 @@ def impulsando_politicas_publicas(request):
     
     #Utilizando dict comprehension, soportado solo por python2.7+
     for op in ACCIONES:
-        tabla_por_tipo[op[1]] = {tema.nombre: AccionImpulsada.objects.filter(informe__in=informes,
-                                                                      tema=tema,
+        tabla_por_tipo[op[1]] = {tema.nombre: AccionImpulsada.objects.filter(informe__in=informes, \
+                                                                      tema=tema, \
                                                                       tipo_accion=op[0]).count() for tema in temas}
     tabla_por_ambito = {}
     for op in AMBITO:
@@ -151,7 +151,13 @@ def impulsando_politicas_publicas(request):
         tabla_ambito_accion[ambito[1]] = {accion[1]: AgendaPublica.objects.filter(informe__in=informes, \
                                                                                   ambito=ambito[0], \
                                                                                   tipo_accion=accion[0]).count() for accion in ACCIONES2}      
-        
+    
+    #---Solicitada por FED julio 2012
+    tabla_comisiones_extra = {}
+    for ambito in COBERTURA:
+        tabla_comisiones_extra[ambito[1]] = {comision[1]: ParticipacionComisionExtra.objects.filter(ambito_territorial=ambito[0], \
+                                                                                                comision=comision[0]).count() \
+                                              for comision in COMISION_CHOICE}    
     return render_to_response('contraparte/impulsando_politicas_publicas.html', RequestContext(request, locals()))        
 
 #--------------------- Resultado 1.2 --------------------------------
@@ -292,98 +298,6 @@ def prevencion_violencia(request):
             for accion in ACCION_PREVENCION:
                 query = PrevencionVBG.objects.filter(informe__in=informes, tipo_accion=accion[0])
                 resultados[grupo][k][accion[1]] = {key: check_none(query.aggregate(campo_sum=Sum(field))['campo_sum']) for key, field in campos.items()}
-    
-    #resultados_organizacion = {}
-    # for grupo, valores in dicc.items():
-    #   for obj in Informe.objects.all():
-    #     resultados_organizacion[obj.organizacion] = {}
-    #     for k, campos in valores.items():
-    #       resultados_organizacion[obj.organizacion][k] = {}
-    #       for acciones in ACCION_PREVENCION:
-    #         query = PrevencionVBG.objects.filter(informe__in=informes, 
-    #                                          tipo_accion=acciones[0],
-    #                                          informe__organizacion=obj.organizacion)
-    #         resultados_organizacion[obj.organizacion][k][acciones[1]] = [a.suma_participacion_mujeres() for a in query]
-    # participantes_mujeres = {}
-    # for organizacion in Informe.objects.all():
-    #     participantes_mujeres[organizacion.organizacion] = {}
-    #     for accion in ACCION_PREVENCION:
-    #       query = PrevencionVBG.objects.filter(informe__in=informes,
-    #                                            tipo_accion=accion[0],
-    #                                            informe__organizacion=organizacion.organizacion)
-    #       participantes_mujeres[organizacion.organizacion][accion[1]] = [int(a.suma_participacion_mujeres()) for a in query]
-
-    # participantes_hombres = {}
-    # for organizacion in Informe.objects.all():
-    #     participantes_hombres[organizacion.organizacion] = {}
-    #     for accion in ACCION_PREVENCION:
-    #       query = PrevencionVBG.objects.filter(informe__in=informes,
-    #                                            tipo_accion=accion[0],
-    #                                            informe__organizacion=organizacion.organizacion)
-    #       participantes_hombres[organizacion.organizacion][accion[1]] = [int(a.suma_participante_hombres()) for a in query]
-
-    # participanteslgbt = {}
-    # for organizacion in Informe.objects.all():
-    #     participanteslgbt[organizacion.organizacion] = {}
-    #     for accion in ACCION_PREVENCION:
-    #       query = PrevencionVBG.objects.filter(informe__in=informes,
-    #                                            tipo_accion=accion[0],
-    #                                            informe__organizacion=organizacion.organizacion)
-    #       participanteslgbt[organizacion.organizacion][accion[1]] = [int(a.participantes_lgbt()) for a in query]
-
-    # hombresdiscapacitados = {}
-    # for organizacion in Informe.objects.all():
-    #     hombresdiscapacitados[organizacion.organizacion] = {}
-    #     for accion in ACCION_PREVENCION:
-    #       query = PrevencionVBG.objects.filter(informe__in=informes,
-    #                                            tipo_accion=accion[0],
-    #                                            informe__organizacion=organizacion.organizacion)
-    #       hombresdiscapacitados[organizacion.organizacion][accion[1]] = [int(a.hombres_discapacitados()) for a in query]  
-
-    # mujeresdiscapacitadas = {}
-    # for organizacion in Informe.objects.all():
-    #     mujeresdiscapacitadas[organizacion.organizacion] = {}
-    #     for accion in ACCION_PREVENCION:
-    #       query = PrevencionVBG.objects.filter(informe__in=informes,
-    #                                            tipo_accion=accion[0],
-    #                                            informe__organizacion=organizacion.organizacion)
-    #       mujeresdiscapacitadas[organizacion.organizacion][accion[1]] = [int(a.mujeres_discapacitadas()) for a in query]
-
-    # hombre_poblacionetnias = {}
-    # for organizacion in Informe.objects.all():
-    #     hombre_poblacionetnias[organizacion.organizacion] = {}
-    #     for accion in ACCION_PREVENCION:
-    #       query = PrevencionVBG.objects.filter(informe__in=informes,
-    #                                            tipo_accion=accion[0],
-    #                                            informe__organizacion=organizacion.organizacion)
-    #       hombre_poblacionetnias[organizacion.organizacion][accion[1]] = [int(a.hombre_poblacion_etnias()) for a in query]          
-    
-    # mujeres_poblacionetnias = {}
-    # for organizacion in Informe.objects.all():
-    #     mujeres_poblacionetnias[organizacion.organizacion] = {}
-    #     for accion in ACCION_PREVENCION:
-    #       query = PrevencionVBG.objects.filter(informe__in=informes,
-    #                                            tipo_accion=accion[0],
-    #                                            informe__organizacion=organizacion.organizacion)
-    #       mujeres_poblacionetnias[organizacion.organizacion][accion[1]] = [int(a.mujeres_poblacion_etnias()) for a in query]
-
-    # hombrevih = {}
-    # for organizacion in Informe.objects.all():
-    #     hombrevih[organizacion.organizacion] = {}
-    #     for accion in ACCION_PREVENCION:
-    #       query = PrevencionVBG.objects.filter(informe__in=informes,
-    #                                            tipo_accion=accion[0],
-    #                                            informe__organizacion=organizacion.organizacion)
-    #       hombrevih[organizacion.organizacion][accion[1]] = [int(a.hombre_vih()) for a in query]
-
-    # mujervih = {}
-    # for organizacion in Informe.objects.all():
-    #     mujervih[organizacion.organizacion] = {}
-    #     for accion in ACCION_PREVENCION:
-    #       query = PrevencionVBG.objects.filter(informe__in=informes,
-    #                                            tipo_accion=accion[0],
-    #                                            informe__organizacion=organizacion.organizacion)
-    #       mujervih[organizacion.organizacion][accion[1]] = [int(a.mujeres_vih()) for a in query]
 
     resultados_2 = {}
     for grupo, valores in dicc.items():
@@ -487,7 +401,7 @@ def organizacion_detail(request, id):
     
     return render_to_response('contraparte/organizacion_detail.html', RequestContext(request, locals()))
 
-#----------------------- salidas ultimas -----------------------------    
+#----------------------- salidas ultimas prevencion por organizacion -----------------------------    
 def generico_organizacion(request, tipo):
     informes = _query_set_filtrado(request)
     suma = 0
@@ -516,10 +430,6 @@ def generico_organizacion(request, tipo):
               diccionario[organizacion.organizacion][accion[1]] = suma = sum([int(a.hombre_vih()) for a in query])
           if tipo == 9:
               diccionario[organizacion.organizacion][accion[1]] = suma= sum([int(a.mujeres_vih()) for a in query])
-          
-
-
-
 
     return diccionario
 
@@ -559,4 +469,72 @@ def mujer_vih_pvbg(request):
     mujervih = generico_organizacion(request,9)
     print mujervih
     return render_to_response('prevension/mujer_vih_pvbg.html', 
+                               RequestContext(request, locals()))
+
+def generico_organizacion_masculinidad(request, tipo):
+    informes = _query_set_filtrado(request)
+    suma = 0
+    diccionario = {}
+    for organizacion in Informe.objects.all():
+        diccionario[organizacion.organizacion] = {}
+        for accion in ACCION_PREVENCION:
+          query = MasculinidadLibre.objects.filter(informe__in=informes,
+                                               tipo_accion=accion[0],
+                                               informe__organizacion=organizacion.organizacion)
+          if tipo == 1:
+              diccionario[organizacion.organizacion][accion[1]] = suma = sum([int(a.participacion_mujeres_mas()) for a in query])
+          if tipo == 2:
+              diccionario[organizacion.organizacion][accion[1]] = suma = sum([int(a.participante_hombres_mas()) for a in query])
+          if tipo == 3:
+              diccionario[organizacion.organizacion][accion[1]] = suma= sum([int(a.participantes_lgbt_mas()) for a in query])
+          if tipo == 4:
+              diccionario[organizacion.organizacion][accion[1]] = suma = sum([int(a.hombres_discapacitados_mas()) for a in query])
+          if tipo == 5:
+              diccionario[organizacion.organizacion][accion[1]] = suma= sum([int(a.mujeres_discapacitadas_mas()) for a in query])
+          if tipo == 6:
+              diccionario[organizacion.organizacion][accion[1]] = suma = sum([int(a.hombre_poblacion_etnias_mas()) for a in query])
+          if tipo == 7:
+              diccionario[organizacion.organizacion][accion[1]] = suma = sum([int(a.mujeres_poblacion_etnias_mas()) for a in query])
+          if tipo == 8:
+              diccionario[organizacion.organizacion][accion[1]] = suma = sum([int(a.hombre_vih_mas()) for a in query])
+          if tipo == 9:
+              diccionario[organizacion.organizacion][accion[1]] = suma= sum([int(a.mujeres_vih_mas()) for a in query])
+
+    return diccionario
+
+def mujeres_mas(request):
+    participantes_mujeres = generico_organizacion_masculinidad(request,1)
+    return render_to_response('masculinidad/mujeres_pvbg.html', 
+                               RequestContext(request, locals()))
+def hombres_mas(request):
+    participantes_hombres = generico_organizacion_masculinidad(request,2)
+    return render_to_response('masculinidad/hombres_pvbg.html', 
+                               RequestContext(request, locals()))
+def lgbt_mas(request):
+    participantes_lgbt = generico_organizacion_masculinidad(request,3)
+    return render_to_response('masculinidad/lgbt_pvbg.html', 
+                               RequestContext(request, locals()))
+def hombres_discapasitado_mas(request):
+    hombresdiscapacitados = generico_organizacion_masculinidad(request,4)
+    return render_to_response('masculinidad/hombres_disca_pvbg.html', 
+                               RequestContext(request, locals()))
+def mujeres_discapasitada_mas(request):
+    mujeresdiscapacitadas = generico_organizacion_masculinidad(request,5)
+    return render_to_response('masculinidad/mujer_disca_pvbg.html', 
+                               RequestContext(request, locals()))
+def hombres_etnia_mas(request):
+    hombre_poblacionetnias = generico_organizacion_masculinidad(request,6)
+    return render_to_response('masculinidad/hombres_etnia_pvbg.html', 
+                               RequestContext(request, locals()))
+def mujer_etnia_mas(request):
+    mujeres_poblacionetnias = generico_organizacion_masculinidad(request,7)
+    return render_to_response('masculinidad/mujer_etnia_pvbg.html', 
+                               RequestContext(request, locals()))
+def hombres_vih_mas(request):
+    hombrevih = generico_organizacion_masculinidad(request,8)
+    return render_to_response('masculinidad/hombres_vih_pvbg.html', 
+                               RequestContext(request, locals()))
+def mujer_vih_mas(request):
+    mujervih = generico_organizacion_masculinidad(request,9)
+    return render_to_response('masculinidad/mujer_vih_pvbg.html', 
                                RequestContext(request, locals()))

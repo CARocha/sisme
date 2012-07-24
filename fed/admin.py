@@ -28,13 +28,19 @@ class PoblacionMetaIndirectaInline(admin.TabularInline):
     model = PoblacionMetaIndirecta
     fields = ['grupo_etareo', 'hombres', 'alcanzada_hombre', 'mujeres', 'alcanzada_mujer']
     extra = 1
+
+class ParticipacionComisionExtraAdmin(admin.TabularInline):
+    model = ParticipacionComisionExtra
+    filter_horizontal = ['municipios']
+    extra = 1
     
 class ProyectoAdmin(BaseAdmin):
     list_display = ['organizacion', 'codigo', 'nombre', 'fecha_inicio', 'fecha_fin']    
     list_filter = ['organizacion', 'modalidad']
     search_fields = ['nombre', 'organizacion__nombre', 'organizacion__nombre_corto']
     
-    inlines = [TemaTrabajoInline, PoblacionMetaDirectaInline, PoblacionMetaIndirectaInline]   
+    inlines = [TemaTrabajoInline, PoblacionMetaDirectaInline, 
+               PoblacionMetaIndirectaInline, ParticipacionComisionExtraAdmin]   
     
 admin.site.register(Donante)
 admin.site.register(Tema)

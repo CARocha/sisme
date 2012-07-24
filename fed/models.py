@@ -80,6 +80,7 @@ MODALIDAD_CHOICE = ((1, u'Apoyo programático'),
                (6, u'Estrategias con grupos priorizados'))
 
 COBERTURA = ((1, 'Municipal'), (2, 'Departamental'), (3, 'Nacional'))
+CHOICE_ACTIVA = ((1, 'No activo'), (2, 'Activo'))
 
 class Proyecto(models.Model):    
     organizacion = models.ForeignKey(Organizacion)
@@ -94,6 +95,7 @@ class Proyecto(models.Model):
     monto_otros = models.DecimalField('Monto otros donantes', blank=True, null=True, decimal_places=2, max_digits=30)
     otros_donantes = models.ManyToManyField(Donante, blank=True, null=True)    
     resultados = models.ManyToManyField(Resultado, blank=True, null=True)
+    proyecto_activo = models.IntegerField(choices=CHOICE_ACTIVA, null=True, blank=True)
     
     def __unicode__(self):
         return u'%s - %s' % (self.organizacion.nombre_corto, self.codigo)
@@ -147,7 +149,26 @@ class PoblacionMetaIndirecta(PoblacionMetaBase):
     class Meta:
         verbose_name = u'Población Meta Indirecta'
         verbose_name_plural = u'Población Meta Indirecta'
-    
+
+COMISION_CHOICE = ((1, u'Comisión de la Niñez y Adolescencia'),
+                   (2, u'Comisión de género / mujer'),
+                   (3, u'Comisión de Salud'),
+                   (4, u'Comisión de lucha contra el SIDA'),
+                   (5, u'Comisión de seguimiento a la aplicación del código penal'),
+                   (6, u'Comisión de prevención de la violencia'))
+
+class ParticipacionComisionExtra(models.Model):
+    proyecto = models.ForeignKey(Proyecto)
+    comision = models.IntegerField(choices=COMISION_CHOICE, null=True, blank=True)
+    ambito_territorial = models.IntegerField(choices=COBERTURA, null=True, blank=True)
+    municipios = models.ManyToManyField(Municipio, null=True, blank=True)
+
+    #def __unicode__(self):
+    #    return self.get_comision_display()
+
+    class Meta:
+        verbose_name_plural = "Participación en comisión"
+
     
     
         
