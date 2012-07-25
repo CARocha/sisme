@@ -50,6 +50,37 @@
 		<li><a href="#cont5"><span>Área de cobertura</span></a></li>
 	</ul>
 	<div id="cont1">
+		<!-- primer tabla -->
+		<div id="activos">
+		<table width="100%">
+				<caption># de organizaciones por modalidad de apoyo</caption>
+				<thead>
+					<tr>
+						<th>Modalidad de apoyo</th>
+						<th>Período</th>
+						<th># de organizaciones</th>
+						<th>Nombres de las organizaciones</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for key, value in tabla_activos.items %}
+					<tr>
+						<td>{{key}}</td>						
+						<td class="cantidad_org">2012</td>
+						<td class="cantidad_org">{{value.cantidad1}}</td>
+						<td>{% for org in value.2012 %}{{org}}{%if not forloop.last%}, {% endif %}{% endfor %}</td>
+					</tr>
+					{% endfor %}
+					<tr>
+						<td class="negrita">Total</td>
+						<td>---</td>
+						<td>{{total_activos}}</td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+			</div>
+
 		<!-- Inicia tabla de modalidad de organizaciones por modelidad de apoyo -->
 		<a class="guardarXLS" href="#" onclick="exportarXLS('modalidad'); return false;">Guardar XLS</a><div class="clean"></div>		
 		<div id="modalidad">

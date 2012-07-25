@@ -124,12 +124,15 @@ def generales(request):
                 lista.append(municipio)
         tabla_temas[tema] = list(set(lista))
 
+    #tabla de proyectos activos
     tabla_activos = {}
-
+    total_activos = 0
     for obj in MODALIDAD_CHOICE:
         actual = Organizacion.objects.filter(proyecto__modalidad=obj[0], \
                                              proyecto__proyecto_activo=2).values_list('nombre_corto', flat=True)          
         lista1 = list(set(actual))
+
+        total_activos += len(lista1)
 
         tabla_activos[obj[1]] = {'cantidad1': len(lista1), '2012': lista1,
                                 }
