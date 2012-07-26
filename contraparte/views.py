@@ -406,30 +406,30 @@ def generico_organizacion(request, tipo):
     informes = _query_set_filtrado(request)
     suma = 0
     diccionario = {}
-    for organizacion in Informe.objects.all():
-        diccionario[organizacion.organizacion] = {}
+    for organizacion in Organizacion.objects.values_list('nombre_corto',flat=True):
+        diccionario[organizacion] = {}
         for accion in ACCION_PREVENCION:
           query = PrevencionVBG.objects.filter(informe__in=informes,
                                                tipo_accion=accion[0],
-                                               informe__organizacion=organizacion.organizacion)
+                                               informe__organizacion__nombre_corto=organizacion)
           if tipo == 1:
-              diccionario[organizacion.organizacion][accion[1]] = suma = sum([int(a.suma_participacion_mujeres()) for a in query])
+              diccionario[organizacion][accion[1]] = suma = sum([int(a.suma_participacion_mujeres()) for a in query])
           if tipo == 2:
-              diccionario[organizacion.organizacion][accion[1]] = suma = sum([int(a.suma_participante_hombres()) for a in query])
+              diccionario[organizacion][accion[1]] = suma = sum([int(a.suma_participante_hombres()) for a in query])
           if tipo == 3:
-              diccionario[organizacion.organizacion][accion[1]] = suma= sum([int(a.participantes_lgbt()) for a in query])
+              diccionario[organizacion][accion[1]] = suma= sum([int(a.participantes_lgbt()) for a in query])
           if tipo == 4:
-              diccionario[organizacion.organizacion][accion[1]] = suma = sum([int(a.hombres_discapacitados()) for a in query])
+              diccionario[organizacion][accion[1]] = suma = sum([int(a.hombres_discapacitados()) for a in query])
           if tipo == 5:
-              diccionario[organizacion.organizacion][accion[1]] = suma= sum([int(a.mujeres_discapacitadas()) for a in query])
+              diccionario[organizacion][accion[1]] = suma= sum([int(a.mujeres_discapacitadas()) for a in query])
           if tipo == 6:
-              diccionario[organizacion.organizacion][accion[1]] = suma = sum([int(a.hombre_poblacion_etnias()) for a in query])
+              diccionario[organizacion][accion[1]] = suma = sum([int(a.hombre_poblacion_etnias()) for a in query])
           if tipo == 7:
-              diccionario[organizacion.organizacion][accion[1]] = suma = sum([int(a.mujeres_poblacion_etnias()) for a in query])
+              diccionario[organizacion][accion[1]] = suma = sum([int(a.mujeres_poblacion_etnias()) for a in query])
           if tipo == 8:
-              diccionario[organizacion.organizacion][accion[1]] = suma = sum([int(a.hombre_vih()) for a in query])
+              diccionario[organizacion][accion[1]] = suma = sum([int(a.hombre_vih()) for a in query])
           if tipo == 9:
-              diccionario[organizacion.organizacion][accion[1]] = suma= sum([int(a.mujeres_vih()) for a in query])
+              diccionario[organizacion][accion[1]] = suma= sum([int(a.mujeres_vih()) for a in query])
 
     return diccionario
 
@@ -475,30 +475,30 @@ def generico_organizacion_masculinidad(request, tipo):
     informes = _query_set_filtrado(request)
     suma = 0
     diccionario = {}
-    for organizacion in Informe.objects.all():
-        diccionario[organizacion.organizacion] = {}
+    for organizacion in Organizacion.objects.values_list('nombre_corto',flat=True):
+        diccionario[organizacion] = {}
         for accion in ACCION_PREVENCION:
           query = MasculinidadLibre.objects.filter(informe__in=informes,
                                                tipo_accion=accion[0],
-                                               informe__organizacion=organizacion.organizacion)
+                                               informe__organizacion__nombre_corto=organizacion)
           if tipo == 1:
-              diccionario[organizacion.organizacion][accion[1]] = suma = sum([int(a.participacion_mujeres_mas()) for a in query])
+              diccionario[organizacion][accion[1]] = suma = sum([int(a.participacion_mujeres_mas()) for a in query])
           if tipo == 2:
-              diccionario[organizacion.organizacion][accion[1]] = suma = sum([int(a.participante_hombres_mas()) for a in query])
+              diccionario[organizacion][accion[1]] = suma = sum([int(a.participante_hombres_mas()) for a in query])
           if tipo == 3:
-              diccionario[organizacion.organizacion][accion[1]] = suma= sum([int(a.participantes_lgbt_mas()) for a in query])
+              diccionario[organizacion][accion[1]] = suma= sum([int(a.participantes_lgbt_mas()) for a in query])
           if tipo == 4:
-              diccionario[organizacion.organizacion][accion[1]] = suma = sum([int(a.hombres_discapacitados_mas()) for a in query])
+              diccionario[organizacion][accion[1]] = suma = sum([int(a.hombres_discapacitados_mas()) for a in query])
           if tipo == 5:
-              diccionario[organizacion.organizacion][accion[1]] = suma= sum([int(a.mujeres_discapacitadas_mas()) for a in query])
+              diccionario[organizacion][accion[1]] = suma= sum([int(a.mujeres_discapacitadas_mas()) for a in query])
           if tipo == 6:
-              diccionario[organizacion.organizacion][accion[1]] = suma = sum([int(a.hombre_poblacion_etnias_mas()) for a in query])
+              diccionario[organizacion][accion[1]] = suma = sum([int(a.hombre_poblacion_etnias_mas()) for a in query])
           if tipo == 7:
-              diccionario[organizacion.organizacion][accion[1]] = suma = sum([int(a.mujeres_poblacion_etnias_mas()) for a in query])
+              diccionario[organizacion][accion[1]] = suma = sum([int(a.mujeres_poblacion_etnias_mas()) for a in query])
           if tipo == 8:
-              diccionario[organizacion.organizacion][accion[1]] = suma = sum([int(a.hombre_vih_mas()) for a in query])
+              diccionario[organizacion][accion[1]] = suma = sum([int(a.hombre_vih_mas()) for a in query])
           if tipo == 9:
-              diccionario[organizacion.organizacion][accion[1]] = suma= sum([int(a.mujeres_vih_mas()) for a in query])
+              diccionario[organizacion][accion[1]] = suma= sum([int(a.mujeres_vih_mas()) for a in query])
 
     return diccionario
 
