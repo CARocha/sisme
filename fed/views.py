@@ -129,7 +129,7 @@ def generales(request):
     total_activos = 0
     for obj in MODALIDAD_CHOICE:
         actual = Organizacion.objects.filter(proyecto__modalidad=obj[0], \
-                                             proyecto__proyecto_activo=2).values_list('nombre_corto', flat=True)          
+                                             proyecto__proyecto_activo=2).values_list('nombre_corto', 'proyecto__codigo')          
         lista1 = list(set(actual))
 
         total_activos += len(lista1)

@@ -59,7 +59,7 @@
 					<tr>
 						<th>Modalidad de apoyo</th>
 						<th>Período</th>
-						<th># de organizaciones</th>
+						<th># de organizaciones con proyectos activos</th>
 						<th>Nombres de las organizaciones</th>
 					</tr>
 				</thead>
@@ -69,7 +69,13 @@
 						<td>{{key}}</td>						
 						<td class="cantidad_org">2012</td>
 						<td class="cantidad_org">{{value.cantidad1}}</td>
-						<td>{% for org in value.2012 %}{{org}}{%if not forloop.last%}, {% endif %}{% endfor %}</td>
+						<td>{% for org in value.2012 %}
+
+							{% for i in org %}
+								{{i}}
+							{% endfor %}
+
+							{%if not forloop.last%}, {% endif %}{% endfor %}</td>
 					</tr>
 					{% endfor %}
 					<tr>
@@ -347,7 +353,7 @@
 		<a class="guardarXLS" href="#" onclick="exportarXLS('montosfedasignados'); return false;">Guardar XLS</a><div class="clean"></div>
 		<div id="montosfedasignados">
 			<table width="100%">
-				<caption>Nombre de la organización, proyecto, monto total asignado por FED, fecha inicio y fecha finalización</caption>
+				<caption>Nombre de la organización, y número de proyectos, monto total asignado por FED, fecha inicio y fecha finalización</caption>
 				<thead>
 					<tr>
 						<th rowspan="2" width="20">Organización</th>
