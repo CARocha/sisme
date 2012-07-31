@@ -44,7 +44,7 @@ class AccionImpulsada(models.Model):
     class Meta:
         verbose_name_plural = 'Acciones Impulsadas'
         
-ACCION = ((1, 'Leyes'), (2, 'Decretos'), (3, 'Reglamentos'),
+ACCION = ((1, 'Iniciativa para promover leyes'), (2, 'Decretos'), (3, 'Reglamentos'),
           (4, 'Ordenanzas Municipales'), (5, 'Normativas'), (6, 'Acuerdos'))
 
 ESTADO_ACCION = ((1, 'Introducida'), (2, 'En proceso'), (3, 'Aprobada'))
