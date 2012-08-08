@@ -123,7 +123,7 @@ def impulsando_politicas_publicas(request):
     
     #------ Participacion en comisiones -----------------------
     tabla_tipo_comisiones = {}
-    for org in informes.values_list('organizacion__nombre_corto', flat=True):
+    for org in Organizacion.objects.values_list('nombre_corto', flat=True):
         tabla_tipo_comisiones[org] = {comision[1]: ParticipacionComision.objects.filter(informe__in=informes.filter(organizacion__nombre_corto=org),
                                                                                         comision=comision[0]).count() for comision in COMISION_CHOICE}
     
@@ -157,7 +157,11 @@ def impulsando_politicas_publicas(request):
     for ambito in COBERTURA:
         tabla_comisiones_extra[ambito[1]] = {comision[1]: ParticipacionComisionExtra.objects.filter(ambito_territorial=ambito[0], \
                                                                                                 comision=comision[0]).count() \
-                                              for comision in COMISION_CHOICE}    
+                                              for comision in COMISION_CHOICE}
+
+    #otra solicitud de FED
+    tabla_leyes = {}
+
     return render_to_response('contraparte/impulsando_politicas_publicas.html', RequestContext(request, locals()))        
 
 #--------------------- Resultado 1.2 --------------------------------

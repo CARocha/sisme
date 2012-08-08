@@ -49,10 +49,20 @@ ACCION = ((1, 'Iniciativa para promover leyes'), (2, 'Decretos'), (3, 'Reglament
 
 ESTADO_ACCION = ((1, 'Introducida'), (2, 'En proceso'), (3, 'Aprobada'))
 
+class Ley(models.Model):
+    nombre = models.CharField(max_length=200)
+
+    def __unicode__(self):
+        return self.nombre
+
+    class Meta:
+        verbose_name_plural = "Nombres de Leyes"
+
 class AccionImplementada(models.Model):
     informe = models.ForeignKey(Informe)
     nombre = models.CharField(max_length=200, verbose_name='Nombre de la actividad')
     accion = models.IntegerField(choices=ACCION)
+    ley = models.ManyToManyField(Ley, null=True, blank=True)
     tema = models.ForeignKey(Tema)
     estado = models.IntegerField(choices=ESTADO_ACCION)
     

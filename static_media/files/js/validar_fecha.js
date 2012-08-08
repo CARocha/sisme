@@ -51,3 +51,16 @@ function loadOptions(url, proy_id, year){
         }
     });
 }
+
+(function($){
+	$(document).ready(function(){
+		$('#id_accionimplementada_set-0-accion').change(function(){	
+    		if (($("#id_accionimplementada_set-0-accion").val()) == 1) {
+    			$('.ley').show("100");
+    		}else{
+    			$('.ley').hide("100");
+    		}
+		});
+});
+})(jQuery || django.jQuery);
+

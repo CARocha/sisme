@@ -21,6 +21,7 @@ class AccionImpulsadaInline(admin.TabularInline):
 class AccionImplementadaInline(admin.TabularInline):
     verbose_name_plural = '1.1.1 Acciones implementadas que posicionan el tema de equidad e igualdad'
     model = AccionImplementada
+    fields = ('nombre','accion','ley','tema','estado')
     extra = 1
     
 class ParticipacionComisionInline(admin.TabularInline):
@@ -256,6 +257,4 @@ class InformeAdmin(admin.ModelAdmin):
 
 admin.site.register(Informe, InformeAdmin)
 admin.site.register(TipoObservatorio)
-
-
-
+admin.site.register(Ley)
