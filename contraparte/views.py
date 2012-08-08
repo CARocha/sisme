@@ -120,7 +120,15 @@ def impulsando_politicas_publicas(request):
         tabla_estado_accion_2[op[1]] = {estado[1]: AccionImplementada.objects.filter(informe__in=informes, \
                                                                                      estado=estado[0], \
                                                                                      accion=op[0]).count() for estado in ESTADO_ACCION}
-    
+     #otra solicitud de FED
+    tabla_leyes = {}
+    conteo_ley = Ley.objects.all().count() + 1
+    for org in Organizacion.objects.values_list('nombre_corto', flat=True):
+        tabla_leyes[org] = {}
+        for obj in Ley.objects.values_list('nombre', flat=True):
+            tabla_leyes[org][obj] = AccionImplementada.objects.filter(informe__in=informes,
+                                                                      informe__organizacion__nombre_corto=org,
+                                                                       ley__nombre=obj).count()
     #------ Participacion en comisiones -----------------------
     tabla_tipo_comisiones = {}
     for org in Organizacion.objects.values_list('nombre_corto', flat=True):
@@ -158,9 +166,6 @@ def impulsando_politicas_publicas(request):
         tabla_comisiones_extra[ambito[1]] = {comision[1]: ParticipacionComisionExtra.objects.filter(ambito_territorial=ambito[0], \
                                                                                                 comision=comision[0]).count() \
                                               for comision in COMISION_CHOICE}
-
-    #otra solicitud de FED
-    tabla_leyes = {}
 
     return render_to_response('contraparte/impulsando_politicas_publicas.html', RequestContext(request, locals()))        
 
