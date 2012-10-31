@@ -65,6 +65,7 @@ class AccionImplementada(models.Model):
     ley = models.ManyToManyField(Ley, null=True, blank=True)
     tema = models.ForeignKey(Tema)
     estado = models.IntegerField(choices=ESTADO_ACCION)
+    comentario = models.TextField(null=True, blank=True)
     
     def __unicode__(self):
         return u'%s - %s' % (self.informe, self.id)
@@ -85,7 +86,8 @@ class ParticipacionComision(models.Model):
     comision = models.IntegerField(choices=COMISION_CHOICE)
     ambito = models.IntegerField(choices=AMBITO, verbose_name=u'Ámbito territorial')
     estado = models.IntegerField(choices=ESTADO_ACCION, verbose_name=u'Efectividad de la acción')    
-    
+    comentario = models.TextField(null=True, blank=True)
+
     def __unicode__(self):
         return u'%s - %s' % (self.informe, self.id)
     
@@ -170,11 +172,23 @@ class DemandaJusticia(models.Model):
 DENUNCIAS = ((1, u'Denuncias realizadas'), (2, u'Atendidas por las instancias correspondientes'), (3, u'Denuncias divulgadas'))
 TIPO_POBLACION = ((1, u'LGBT'), (2, u'Discapacitados/as'), (3, u'VIH'), (4, u'Étnica e indígena'))
 
+class InstanciaEstado(models.Model):
+    nombre = models.CharField(max_length=200)
+
+    def __unicode__(self):
+        return u'%s' % (self.nombre)
+
+    class Meta:
+        verbose_name_plural = "Instancia del estado"
+
 class Denuncia(models.Model):
     informe = models.ForeignKey(Informe)
     nombre = models.CharField(max_length=200, verbose_name='Nombre de la actividad')
     situacion = models.IntegerField(choices=DENUNCIAS)
-    tipo_poblacion = models.IntegerField(choices=TIPO_POBLACION)    
+    tipo_poblacion = models.IntegerField(choices=TIPO_POBLACION)
+    instancia = models.ForeignKey(InstanciaEstado, verbose_name=u'Instancia estado', 
+                                  null=True, blank=True)
+    comentario = models.TextField(null=True, blank=True)    
     
     def __unicode__(self):
         return u'%s - %s' % (self.informe, self.id)
@@ -514,7 +528,8 @@ class AtencionMujer(models.Model):
     informe = models.ForeignKey(Informe)
     organizacion = models.IntegerField(choices=ORGANIZACION_CHOICE)
     tipo_poblacion = models.IntegerField(choices=TIPO_POBLACION_ATENCION)
-    plan_vida = models.IntegerField(choices=SI_NO_SIMPLE)        
+    plan_vida = models.IntegerField(choices=SI_NO_SIMPLE)
+    comentario = models.TextField(null=True, blank=True)        
     
     def __unicode__(self):        
         return u'%s - %s' % (self.informe, self.id)
