@@ -258,3 +258,4 @@ class InformeAdmin(admin.ModelAdmin):
 admin.site.register(Informe, InformeAdmin)
 admin.site.register(TipoObservatorio)
 admin.site.register(Ley)
+admin.site.register(InstanciaEstado)
