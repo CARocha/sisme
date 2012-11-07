@@ -39,6 +39,7 @@ class Organizacion(models.Model):
     class Meta:
         verbose_name = u'Organización'
         verbose_name_plural = u'Organizaciones'
+        ordering = ('nombre_corto',)
 
 class Donante(models.Model):
     nombre = models.CharField(max_length=200)
@@ -49,6 +50,7 @@ class Donante(models.Model):
     
     class Meta:        
         verbose_name_plural = u'Donantes'
+        ordering = ('nombre_corto',)
         
 class Tema(models.Model):    
     nombre = models.CharField(max_length=100)    
@@ -59,6 +61,7 @@ class Tema(models.Model):
     class Meta:
         verbose_name = u'Tema de FED'        
         verbose_name_plural = u'Temas del FED'
+        ordering = ('nombre',)
 
 class Resultado(models.Model):
     nombre_corto = models.CharField(max_length=35)
@@ -70,6 +73,7 @@ class Resultado(models.Model):
     
     class Meta:        
         verbose_name_plural = 'Resultados'
+        ordering = ('nombre_corto',)
 
 
 MODALIDAD_CHOICE = ((1, u'Apoyo programático'),

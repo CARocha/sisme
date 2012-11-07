@@ -25,7 +25,8 @@ class Informe(models.Model):
         return u'%s | Período: %s-%s' % (self.organizacion.nombre_corto, self.get_mes_display(), self.anio)
     
     class Meta:
-        verbose_name_plural = u'Informes'        
+        verbose_name_plural = u'Informes'
+        ordering = ('organizacion','anio')        
 
 AMBITO = ((1, 'Municipales'), (2, 'Departamentales'), (3, 'Nacional'), (4, u'Regiones Autónomas'))
     
@@ -57,6 +58,7 @@ class Ley(models.Model):
 
     class Meta:
         verbose_name_plural = "Nombres de Leyes"
+        ordering = ('nombre',)
 
 class AccionImplementada(models.Model):
     informe = models.ForeignKey(Informe)
@@ -118,6 +120,7 @@ class TipoObservatorio(models.Model):
     class Meta:
         verbose_name = u'Tipo de Observatorio'
         verbose_name_plural = 'Tipos de Observatorios'
+        ordering = ('nombre',)
 
 ACCION_OBSERVATORIO = ((1, u'Divulgaciones de investigación'),
                        (2, u'Divulgación de estudios'),
@@ -180,6 +183,7 @@ class InstanciaEstado(models.Model):
 
     class Meta:
         verbose_name_plural = "Instancia del estado"
+        ordering = ('nombre',)
 
 class Denuncia(models.Model):
     informe = models.ForeignKey(Informe)

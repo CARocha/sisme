@@ -10,3 +10,4 @@ uploads/
 *.css~
 *.db
 *.swp
+*.sql

@@ -15,12 +15,12 @@
 {% block content %}
 <div id="tabs" style="font-size: 70%;">
 	<ul>
-		<li><a href="#casos-atendidos"><span>Casos atendidos</span></a></li>
-		<li><a href="#estado-casos"><span>Estado de los casos atendidos</span></a></li>
-		<li><a href="#denuncias-interpuestas"><span>Denuncias interpuestas</span></a></li>
-		<li><a href="#estado-denuncias"><span>Estado de denuncias</span></a></li>
-		<li><a href="#albergues"><span>Atención en Albergues</span></a></li>
-		<li><a href="#ref-contra"><span>Referencias y Contrareferencias</span></a></li>		
+		<li><a href="#casos-atendidos"><span>Casos atendidos</span><span class="colorspan">(Indicardor 2.3.1)</span> </a></li>
+		<li><a href="#estado-casos"><span>Estado de los casos atendidos</span><span class="colorspan">(Indicardor 2.3.1)</span> </a></li>
+		<li><a href="#denuncias-interpuestas"><span>Denuncias interpuestas</span><span class="colorspan">(Indicardor 2.3.2)</span> </a></li>
+		<li><a href="#estado-denuncias"><span>Estado de denuncias</span><span class="colorspan">(Indicardor 2.3.2)</span> </a></li>
+		<li><a href="#albergues"><span>Atención en Albergues</span><span class="colorspan">(Indicardor 2.3.4)</span> </a></li>
+		<li><a href="#ref-contra"><span>Referencias y Contrareferencias</span><span class="colorspan">(Indicardor 2.3.5)</span> </a></li>		
 	</ul>
 	<div id="casos-atendidos">	
 	{% with tabla=tabla_casos_atendidos titulo='Casos atendidos por las organizaciones' primer_td='Organizaciones' colspan=4 titulo_combinado='# de casos atendidos' %}
