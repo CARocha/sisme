@@ -372,7 +372,7 @@ ACCION_PREVENCION = ((1, u'Campañas en Televisión'),
                      (8, u'Materiales educativos'),
                      (9, u'Reuniones con autoridades'),
                      (10, u'Consejeria y promotoria social'),
-                     (11, u'Campaña contra la discriminación LGTB'))
+                     (11, u'Campaña contra la discriminación LGBT'))
     
 class BaseR22(models.Model):
     informe = models.ForeignKey(Informe)
