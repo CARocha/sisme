@@ -232,7 +232,24 @@ def acciones_reflexion(request):
                                                                              tipo_accion=accion[0], \
                                                                              tema=tema).count() for tema in temas}
     
-    return render_to_response('contraparte/acciones_reflexion.html', RequestContext(request, locals()))
+
+    
+    return render_to_response('contraparte/acciones_reflexion.html', 
+                              RequestContext(request, locals()))
+
+def acciones_por_ocp(request):
+    informes = _query_set_filtrado(request)
+    tabla_por_acccion = {}
+    for organizacion in Organizacion.objects.values_list('nombre_corto',flat=True):
+        tabla_por_acccion[organizacion] = {}
+        for accion in ACCION_POSEE_INFO:
+          query = PrevencionVBG.objects.filter(informe__in=informes,
+                                               tipo_accion=accion[0],
+                                               informe__organizacion__nombre_corto=organizacion).count()
+          tabla_por_acccion[organizacion][accion[1]] = query
+
+    return render_to_response('contraparte/acciones_por_ocp.html', 
+                               RequestContext(request, locals()))
 
 dicc = {1: {'Participantes mujeres': {u'Niñas': 'muj_ninas',
                                            u'Adolescentes': 'muj_adols',
