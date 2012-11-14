@@ -51,4 +51,5 @@ urlpatterns = patterns('sisme.contraparte.views',
     #---------------- acciones por OCP ----------------------------------------------
     (r'^acciones_ocp_pvbg/$', 'generico_organizacion_acciones_ocp_prevencion'),
     (r'^acciones_ocp_masculinidad/$', 'generico_organizacion_accion_ocp_masculinidad'),
+    (r'^comentario_org/$', 'cometario_informe'),
 )

@@ -1,0 +1,24 @@
+<table width="100%">
+		<caption>prueba</caption>
+		<thead>
+			<tr>
+				<th>organizcion</th>				
+				{% for key, value in tabla_cometario_org.items|slice:":1" %}
+				{% for k in value.keys %}
+				<th class="centrado">{{k}}</th>
+				{% endfor %}
+				{% endfor %}
+			</tr>
+		</thead>
+		<tbody>
+			{% for key, value in tabla_cometario_org.items %}
+			<tr>
+				<td> <a href="#">{{key}}</a></td>
+				{% for k, v in value.items %}
+				
+				<td>{{v|length}}</td>
+				{% endfor %}
+			</tr>
+			{% endfor %}	
+		</tbody>
+	</table>

@@ -120,7 +120,7 @@ def impulsando_politicas_publicas(request):
         tabla_estado_accion_2[op[1]] = {estado[1]: AccionImplementada.objects.filter(informe__in=informes, \
                                                                                      estado=estado[0], \
                                                                                      accion=op[0]).count() for estado in ESTADO_ACCION}
-     #otra solicitud de FED
+    #otra solicitud de FED
     tabla_leyes = {}
     conteo_ley = Ley.objects.all().count() + 1
     for org in Organizacion.objects.values_list('nombre_corto', flat=True):
@@ -168,6 +168,21 @@ def impulsando_politicas_publicas(request):
                                               for comision in COMISION_CHOICE}
 
     return render_to_response('contraparte/impulsando_politicas_publicas.html', RequestContext(request, locals()))        
+
+#---------- devolver comentarios ------------------------
+def cometario_informe(request):
+    informes = _query_set_filtrado(request)
+    tabla_cometario_org = {}
+    for org in Organizacion.objects.values_list('nombre_corto', flat=True):
+        tabla_cometario_org[org] = {}
+        for action in ACCION:
+            tabla_cometario_org[org][action[1]] = AccionImplementada.objects.filter(informe__in=informes, \
+                                                                                    informe__organizacion__nombre_corto=org, \
+                                                                                    accion=action[0])
+    print tabla_cometario_org
+    return render_to_response('contraparte/comentario_org.html',
+                               RequestContext(request, locals()))
+    
 
 #--------------------- Resultado 1.2 --------------------------------
 def demandando_justicia(request):
