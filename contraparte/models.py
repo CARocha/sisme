@@ -207,7 +207,8 @@ ACCION_POSEE_INFO = ((1, u'Talleres de formación'),
                      (3, u'Videos reflexivos'), 
                      (4, u'Intercambios de experiencias'),
                      (5, u'Visitas de campo'),
-                     (6, u'Consejería'))
+                     (6, u'Consejería'),
+                     (7, u'Campañas educativas'))
 
 TIPO_POBLACION2 = ((1, 'Mujeres'), 
                   (2, 'Hombres'), 
@@ -370,7 +371,8 @@ ACCION_PREVENCION = ((1, u'Campañas en Televisión'),
                      (7, u'Visitas grupales o individuales'),
                      (8, u'Materiales educativos'),
                      (9, u'Reuniones con autoridades'),
-                     (10, u'Consejeria y promotoria social'))
+                     (10, u'Consejeria y promotoria social'),
+                     (11, u'Campaña contra la discriminación LGBT'))
     
 class BaseR22(models.Model):
     informe = models.ForeignKey(Informe)
