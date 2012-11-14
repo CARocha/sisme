@@ -547,3 +547,34 @@ def mujer_vih_mas(request):
     mujervih = generico_organizacion_masculinidad(request,9)
     return render_to_response('masculinidad/mujer_vih_pvbg.html', 
                                RequestContext(request, locals()))
+
+# Salidas de numero y tipo de acciones por OCP
+
+def generico_organizacion_acciones_ocp_prevencion(request):
+    informes = _query_set_filtrado(request)
+    suma = 0
+    diccionario = {}
+    for organizacion in Organizacion.objects.values_list('nombre_corto',flat=True):
+        diccionario[organizacion] = {}
+        for accion in ACCION_PREVENCION:
+          query = PrevencionVBG.objects.filter(informe__in=informes,
+                                               tipo_accion=accion[0],
+                                               informe__organizacion__nombre_corto=organizacion).count()
+          diccionario[organizacion][accion[1]] = query
+  
+    return render_to_response('prevension/acciones_ocp_pvbg.html', 
+                               RequestContext(request, locals()))
+
+def generico_organizacion_accion_ocp_masculinidad(request):
+    informes = _query_set_filtrado(request)
+    suma = 0
+    diccionario = {}
+    for organizacion in Organizacion.objects.values_list('nombre_corto',flat=True):
+        diccionario[organizacion] = {}
+        for accion in ACCION_PREVENCION:
+          query = MasculinidadLibre.objects.filter(informe__in=informes,
+                                               tipo_accion=accion[0],
+                                               informe__organizacion__nombre_corto=organizacion).count()
+          diccionario[organizacion][accion[1]] = query
+    return render_to_response('masculinidad/acciones_ocp_mas.html', 
+                               RequestContext(request, locals()))

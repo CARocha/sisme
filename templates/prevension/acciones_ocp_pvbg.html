@@ -1,0 +1,10 @@
+{%extends "base.html"%}
+{% block title %}Acciones por OCP 2.2.1{% endblock %}
+
+{% load tools %}
+
+{%block content%}
+	{% with tabla=diccionario titulo='organizaciones' primer_td='Organizaciones' colspan=11 titulo_combinado='acciones' percent=1 aux=1 %}
+		{% include "tabla_generica.html" %}
+		{% endwith %}
+{%endblock%}

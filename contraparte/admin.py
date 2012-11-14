@@ -207,7 +207,7 @@ class InformeAdmin(admin.ModelAdmin):
     actions_on_top = True
     list_display = ['organizacion', 'proyecto', 'mes', 'anio']
     list_filter = ['organizacion', 'proyecto']
-    search_fields = ['organizacion__nombre', 'organizacion__nombre_corto', 'organizacion__codigo', 'proyecto__nombre', 'proyecto__codigo']    
+    search_fields = ['organizacion__nombre', 'organizacion__nombre_corto', 'proyecto__nombre']    
     add_form_template = 'admin/contraparte/informe/add_template.html'    
     fieldsets = [
         (None, {'fields': ['organizacion', 'proyecto']}),

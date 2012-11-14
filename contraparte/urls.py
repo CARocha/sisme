@@ -47,4 +47,7 @@ urlpatterns = patterns('sisme.contraparte.views',
     (r'^participacion_mujeres_etnia_mas/$', 'mujer_etnia_mas'),
     (r'^participacion_hombre_vih_mas/$', 'hombres_vih_mas'),
     (r'^participacion_mujeres_vih_mas/$', 'mujer_vih_mas'),
+    #---------------- acciones por OCP ----------------------------------------------
+    (r'^acciones_ocp_pvbg/$', 'generico_organizacion_acciones_ocp_prevencion'),
+    (r'^acciones_ocp_masculinidad/$', 'generico_organizacion_accion_ocp_masculinidad'),
 )
