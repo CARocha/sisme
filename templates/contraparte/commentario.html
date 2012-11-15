@@ -1,0 +1,7 @@
+{% for coment in comment %}
+	{{coment.nombre}} <br>
+	{{coment.comentario}} <br>
+	{{coment.informe}} <br>
+{% empty %}
+	<p>No hay comentarios</p>
+{% endfor %}

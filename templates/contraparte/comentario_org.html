@@ -1,8 +1,18 @@
+{% block extra_head %}
+<link type="text/css" rel="stylesheet"  href="{{STATIC_URL}}css/facebox.css">
+<script type="text/javascript" src="/files/js/facebox.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('a[rel*=facebox]').facebox() 
+	});
+</script>
+{%endblock%}
+<div class="sintags">
 <table width="100%">
-		<caption>prueba</caption>
+		<caption>Comentarios(Indicador 1.1.1 Acciones implementadas que posicionan el tema de equidad e igualdad)</caption>
 		<thead>
 			<tr>
-				<th>organizcion</th>				
+				<th>Organización</th>				
 				{% for key, value in tabla_cometario_org.items|slice:":1" %}
 				{% for k in value.keys %}
 				<th class="centrado">{{k}}</th>
@@ -13,12 +23,12 @@
 		<tbody>
 			{% for key, value in tabla_cometario_org.items %}
 			<tr>
-				<td> <a href="#">{{key}}</a></td>
+				<td><a href="/a/ver_comentario/{{key|slugify}}" rel="facebox">{{key}}</a></td>
 				{% for k, v in value.items %}
-				
-				<td>{{v|length}}</td>
+					<td>{{v}}</td>
 				{% endfor %}
 			</tr>
 			{% endfor %}	
 		</tbody>
-	</table>
+</table>
+</div>

@@ -6,6 +6,7 @@ from forms import InfluenciaForm
 from models import *
 from sisme.fed.models import *
 import json
+from django.template.defaultfilters import slugify
 
 def indicadores(request):
     if request.method == 'POST':
@@ -178,10 +179,18 @@ def cometario_informe(request):
         for action in ACCION:
             tabla_cometario_org[org][action[1]] = AccionImplementada.objects.filter(informe__in=informes, \
                                                                                     informe__organizacion__nombre_corto=org, \
-                                                                                    accion=action[0])
-    print tabla_cometario_org
+                                                                                    accion=action[0]).count()
     return render_to_response('contraparte/comentario_org.html',
                                RequestContext(request, locals()))
+
+def ver_comentario(request, organizacion):
+    informes = _query_set_filtrado(request)
+    a = slugify(organizacion).replace('-', ' ')
+    comment = AccionImplementada.objects.filter(informe__in=informes, \
+                                                informe__organizacion__nombre_corto__icontains=a,
+                                                )
+    return render_to_response('contraparte/commentario.html',
+                              RequestContext(request, locals()))
     
 
 #--------------------- Resultado 1.2 --------------------------------

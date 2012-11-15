@@ -245,7 +245,7 @@ th {
 	text-align: left;
 	font-weight: bold;
 	padding: 10px 5px 4px 12px;
-	background: #EDEBEA url(/files/images/bg_header.png) repeat-x;
+	background: #EDEBEA;
 	vertical-align: middle;
 }
 td {
