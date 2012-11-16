@@ -174,6 +174,7 @@ def impulsando_politicas_publicas(request):
 def cometario_informe(request):
     informes = _query_set_filtrado(request)
     tabla_cometario_org = {}
+
     for org in Organizacion.objects.values_list('nombre_corto', flat=True):
         tabla_cometario_org[org] = {}
         for action in ACCION:
@@ -183,10 +184,33 @@ def cometario_informe(request):
     return render_to_response('contraparte/comentario_org.html',
                                RequestContext(request, locals()))
 
-def ver_comentario(request, organizacion):
+def cometario_informe_comision(request):
+    informes = _query_set_filtrado(request)
+    tabla_cometario_org = {}
+
+    for org in Organizacion.objects.values_list('nombre_corto', flat=True):
+        tabla_cometario_org[org] = {}
+        for action in COMISION_CHOICE:
+            tabla_cometario_org[org][action[1]] = ParticipacionComision.objects.filter(informe__in=informes, \
+                                                                                    informe__organizacion__nombre_corto=org, \
+                                                                                    comision=action[0]).count()
+    return render_to_response('contraparte/comentario_org_comision.html',
+                               RequestContext(request, locals()))
+
+def ver_comentario(request, organizacion, tipo):
     informes = _query_set_filtrado(request)
     a = slugify(organizacion).replace('-', ' ')
-    comment = AccionImplementada.objects.filter(informe__in=informes, \
+    b = tipo
+    if b == 1:
+        print "fuck"
+    elif b == 2:
+        print "you"
+    if tipo == 1:
+        comment = AccionImplementada.objects.filter(informe__in=informes, \
+                                                informe__organizacion__nombre_corto__icontains=a,
+                                                )
+    elif tipo == 2:
+        comment = ParticipacionComision.objects.filter(informe__in=informes, \
                                                 informe__organizacion__nombre_corto__icontains=a,
                                                 )
     return render_to_response('contraparte/commentario.html',

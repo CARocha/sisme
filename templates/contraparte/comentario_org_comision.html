@@ -9,7 +9,7 @@
 {%endblock%}
 <div class="sintags">
 <table width="100%">
-		<caption>Comentarios(Indicador 1.1.1 Acciones implementadas que posicionan el tema de equidad e igualdad)</caption>
+		<caption>Comentarios(Indicador 1.1.2  Participación en comisiones para incidir sobre toma de decisiones sobre DDSSRR y equidad)</caption>
 		<thead>
 			<tr>
 				<th>Organización</th>				
@@ -23,7 +23,7 @@
 		<tbody>
 			{% for key, value in tabla_cometario_org.items %}
 			<tr>
-				<td><a href="/a/ver_comentario/{{key|slugify}}/1" rel="facebox">{{key}}</a></td>
+				<td><a href="/a/ver_comentario/{{key|slugify}}/2" rel="facebox">{{key}}</a></td>
 				{% for k, v in value.items %}
 					<td>{{v}}</td>
 				{% endfor %}
