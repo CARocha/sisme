@@ -20,7 +20,7 @@
 
 #facebox .content {
   display:table;
-  width: 370px;
+  width: 570px;
   padding: 10px;
   background: #fff;
   -webkit-border-radius:4px;
@@ -77,4 +77,42 @@
 .facebox_overlayBG {
   background-color: #000;
   z-index: 99;
+}
+/* parte de los comentarios*/
+#comentarioss {
+  width: 570px;
+  height: 550px;
+  overflow:auto;
+}
+
+.commt-nombre {
+  padding: 10px;
+  margin: 10px;
+  -moz-box-shadow:    inset 0 0 10px #000000;
+  -webkit-box-shadow: inset 0 0 10px #000000;
+  box-shadow:         inset 0 0 10px #000000;
+  border:3px solid rgba(0,0,0,0);
+  -webkit-border-radius:5px;
+  -moz-border-radius:5px;
+  border-radius:5px;
+  color: black;
+}
+
+.commt-comentario {
+  padding: 10px;
+  margin: 10px;
+  color: black;
+}
+
+.commt-informe {
+  padding: 10px;
+  margin: 10px;
+  -moz-box-shadow:    inset 0 0 10px #000000;
+  -webkit-box-shadow: inset 0 0 10px #000000;
+  box-shadow:         inset 0 0 10px #000000;
+  border:3px solid rgba(0,0,0,0);
+  -webkit-border-radius:5px;
+  -moz-border-radius:5px;
+  border-radius:5px;
+  color: black;
 }

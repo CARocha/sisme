@@ -1,7 +1,17 @@
-{% for coment in comment %}
-	{{coment.nombre}} <br>
-	{{coment.comentario}} <br>
-	{{coment.informe}} <br>
+<div id="comentarioss">
+	{% for coment in comment %}
+		<div class="commt-nombre">
+		 	Actividad: {{coment.nombre}}
+		 </div>
+		 <div class="commt-comentario">
+		 	Comentario: {{coment.comentario}}
+		 </div>
+		<div class="commt-informe">
+			Fecha: {{coment.informe}}
+		</div>
+		
 {% empty %}
 	<p>No hay comentarios</p>
 {% endfor %}
+	
+</div>
