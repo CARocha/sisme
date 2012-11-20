@@ -183,6 +183,15 @@ def cometario_informe(request):
                                                                                     accion=action[0]).count()
     return render_to_response('contraparte/comentario_org.html',
                                RequestContext(request, locals()))
+def ver_comentario(request, organizacion):
+    informes = _query_set_filtrado(request)
+    a = slugify(organizacion).replace('-', ' ')
+    comment = AccionImplementada.objects.filter(informe__in=informes, \
+                                                informe__organizacion__nombre_corto__icontains=a,
+                                                )
+    return render_to_response('contraparte/commentario.html',
+                              RequestContext(request, locals()))
+#-------------------------------------------------------------------
 
 def cometario_informe_comision(request):
     informes = _query_set_filtrado(request)
@@ -197,25 +206,58 @@ def cometario_informe_comision(request):
     return render_to_response('contraparte/comentario_org_comision.html',
                                RequestContext(request, locals()))
 
-def ver_comentario(request, organizacion, tipo):
+def ver_comentario_comision(request, organizacion):
     informes = _query_set_filtrado(request)
     a = slugify(organizacion).replace('-', ' ')
-    b = tipo
-    if b == 1:
-        print "fuck"
-    elif b == 2:
-        print "you"
-    if tipo == 1:
-        comment = AccionImplementada.objects.filter(informe__in=informes, \
+    comment = ParticipacionComision.objects.filter(informe__in=informes, \
                                                 informe__organizacion__nombre_corto__icontains=a,
                                                 )
-    elif tipo == 2:
-        comment = ParticipacionComision.objects.filter(informe__in=informes, \
-                                                informe__organizacion__nombre_corto__icontains=a,
-                                                )
-    return render_to_response('contraparte/commentario.html',
+    return render_to_response('contraparte/commentario_comision.html',
                               RequestContext(request, locals()))
-    
+#-------------------------------------------------------------------------
+def comentario_denuncia_osc(request):
+    informes = _query_set_filtrado(request)
+    tabla_cometario_org = {}
+
+    for org in Organizacion.objects.values_list('nombre_corto', flat=True):
+        tabla_cometario_org[org] = {}
+        for action in DENUNCIAS:
+            tabla_cometario_org[org][action[1]] = Denuncia.objects.filter(informe__in=informes, \
+                                                                          informe__organizacion__nombre_corto=org, \
+                                                                          situacion=action[0]).count()
+    return render_to_response('contraparte/comentario_org_osc.html',
+                               RequestContext(request, locals()))
+
+def ver_comentario_osc(request, organizacion):
+    informes = _query_set_filtrado(request)
+    a = slugify(organizacion).replace('-', ' ')
+    comment = Denuncia.objects.filter(informe__in=informes, \
+                                                informe__organizacion__nombre_corto__icontains=a,
+                                                )
+    return render_to_response('contraparte/commentario_osc.html',
+                              RequestContext(request, locals())) 
+#----------------------------------------------------------------------------
+def comentario_albergue(request):
+    informes = _query_set_filtrado(request)
+    tabla_cometario_org = {}
+
+    for org in Organizacion.objects.values_list('nombre_corto', flat=True):
+        tabla_cometario_org[org] = {}
+        for action in TIPO_POBLACION_ATENCION:
+            tabla_cometario_org[org][action[1]] = AtencionMujer.objects.filter(informe__in=informes, \
+                                                                          informe__organizacion__nombre_corto=org, \
+                                                                          tipo_poblacion=action[0]).count()
+    return render_to_response('contraparte/comentario_org_albergue.html',
+                               RequestContext(request, locals()))
+
+def ver_comentario_albergues(request, organizacion):
+    informes = _query_set_filtrado(request)
+    a = slugify(organizacion).replace('-', ' ')
+    comment = AtencionMujer.objects.filter(informe__in=informes, \
+                                        informe__organizacion__nombre_corto__icontains=a,
+                                        )
+    return render_to_response('contraparte/commentario_albergues.html',
+                              RequestContext(request, locals())) 
 
 #--------------------- Resultado 1.2 --------------------------------
 def demandando_justicia(request):

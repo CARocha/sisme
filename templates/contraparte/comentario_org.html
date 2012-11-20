@@ -23,7 +23,7 @@
 		<tbody>
 			{% for key, value in tabla_cometario_org.items %}
 			<tr>
-				<td><a href="/a/ver_comentario/{{key|slugify}}/1" rel="facebox">{{key}}</a></td>
+				<td><a href="/a/ver_comentario/{{key|slugify}}" rel="facebox">{{key}}</a></td>
 				{% for k, v in value.items %}
 					<td>{{v}}</td>
 				{% endfor %}

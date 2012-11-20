@@ -1,15 +1,17 @@
 <div id="comentarioss">
 	{% for coment in comment %}
-		<div class="commt-nombre">
-		 	Actividad: {{coment.nombre}}
-		 </div>
-		 <div class="commt-comentario">
-		 	Comentario: {{coment.comentario}}
-		 </div>
-		<div class="commt-informe">
-			Fecha: {{coment.informe}}
-		</div>
-		
+		{% if coment.comentario %}
+			<div class="commt-nombre">
+			 	<span>Actividad:</span> {{coment.nombre}}
+			</div>
+			<div class="commt-comentario">
+			 	<span>Comentario:</span> {{coment.comentario}}
+			</div>
+			<div class="commt-informe">
+				<span>Fecha:</span> {{coment.informe}}
+			</div>
+			<hr>
+		{% endif %}		
 {% empty %}
 	<p>No hay comentarios</p>
 {% endfor %}

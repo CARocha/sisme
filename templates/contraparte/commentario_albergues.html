@@ -1,0 +1,20 @@
+<div id="comentarioss">
+	{% for coment in comment %}
+		{% if coment.comentario %}
+		<div class="commt-nombre">
+		 	<span>Organización:</span> {{coment.get_organizacion_display}}
+		</div>
+		<div class="commt-comentario">
+		 	<span>Comentario:</span> {{coment.comentario}}
+		</div>
+		<div class="commt-informe">
+			<span>Fecha:</span> {{coment.informe}}
+		</div>
+		<hr>
+		{% endif %}
+		
+{% empty %}
+	<p>No hay comentarios</p>
+{% endfor %}
+	
+</div>
