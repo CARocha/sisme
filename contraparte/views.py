@@ -175,12 +175,13 @@ def cometario_informe(request):
     informes = _query_set_filtrado(request)
     tabla_cometario_org = {}
 
-    for org in Organizacion.objects.values_list('nombre_corto', flat=True):
+    for org in Organizacion.objects.values_list('nombre_corto', flat=True).order_by('nombre_corto'):
         tabla_cometario_org[org] = {}
         for action in ACCION:
             tabla_cometario_org[org][action[1]] = AccionImplementada.objects.filter(informe__in=informes, \
                                                                                     informe__organizacion__nombre_corto=org, \
                                                                                     accion=action[0]).count()
+
     return render_to_response('contraparte/comentario_org.html',
                                RequestContext(request, locals()))
 def ver_comentario(request, organizacion):

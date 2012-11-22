@@ -109,6 +109,7 @@ class Proyecto(models.Model):
     
     class Meta:
         verbose_name_plural = u'Proyectos'
+        ordering = ['organizacion', 'fecha_fin']
         
 class TemaTrabajo(models.Model):
     proyecto = models.ForeignKey(Proyecto)

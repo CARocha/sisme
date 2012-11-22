@@ -26,7 +26,8 @@ class Informe(models.Model):
     
     class Meta:
         verbose_name_plural = u'Informes'
-        ordering = ('organizacion','anio')        
+        #order_with_respect_to = 'organizacion'
+        ordering = ['-anio','organizacion']        
 
 AMBITO = ((1, 'Municipales'), (2, 'Departamentales'), (3, 'Nacional'), (4, u'Regiones Autónomas'))
     
