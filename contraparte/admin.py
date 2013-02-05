@@ -158,8 +158,8 @@ class AtencionMujerInline(admin.TabularInline):
     verbose_name_plural = '2.3.4. Número de mujeres atendidas en los albergues apoyados por  el FED como instrumento para la construcción de nuevos proyectos de vida.'
     model = AtencionMujer
     extra = 1
-    template = 'admin/contraparte/informe/tabular.html'
-    resultado = 'R2.3 (Atención en albergues) Acceso a servicios de atención integral y demanda de salud y justicia para las victimas de violencia de género'
+    #template = 'admin/contraparte/informe/tabular.html'
+    #resultado = 'R2.3 (Atención en albergues) Acceso a servicios de atención integral y demanda de salud y justicia para las victimas de violencia de género'
 
 class ReferenciaContraReferenciaInline(admin.TabularInline):
     verbose_name_plural = '2.3.5. Número de referencia y contra referencias que realizan las OCP del FED con instituciones públicas.'
@@ -189,9 +189,9 @@ PERMISOS = {
             2: [DemandaJusticiaInline, DenunciaInline],
             3: [PoseenInfoInline, RecibenInfoInline],
             4: [PrevencionVBGInline, MasculinidadLibreInline], 
-            5: [CasoAtendidoInline, DenunciaInterpuestaInline, ReferenciaContraReferenciaInline],
+            5: [CasoAtendidoInline, DenunciaInterpuestaInline, AtencionMujerInline, ReferenciaContraReferenciaInline],
             6: [CapacidadAdmitivaInline, MedirReportarInline, PlanEstrategicoInline],
-            7: [AtencionMujerInline, ]           
+            7: [ ]           
             }
 
 #funcion para obtener los permisos del proyecto
