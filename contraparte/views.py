@@ -334,7 +334,7 @@ def acciones_por_ocp(request):
     for organizacion in Organizacion.objects.values_list('nombre_corto',flat=True):
         tabla_por_acccion[organizacion] = {}
         for accion in ACCION_POSEE_INFO:
-          query = PrevencionVBG.objects.filter(informe__in=informes,
+          query = PoseenInfo.objects.filter(informe__in=informes,
                                                tipo_accion=accion[0],
                                                informe__organizacion__nombre_corto=organizacion).count()
           tabla_por_acccion[organizacion][accion[1]] = query
