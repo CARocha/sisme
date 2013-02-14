@@ -32,3 +32,29 @@
 		</tbody>
 </table>
 </div>
+<br><br>
+<div class="sintags">
+<table width="100%">
+		<caption>Acciones impulsadas por organizaciones</caption>
+		<thead>
+			<tr>
+				<th>Organización</th>				
+				{% for key, value in tabla_impulsando_por_org.items|slice:":1" %}
+				{% for k in value.keys %}
+				<th class="centrado">{{k}}</th>
+				{% endfor %}
+				{% endfor %}
+			</tr>
+		</thead>
+		<tbody>
+			{% for key, value in tabla_impulsando_por_org.items %}
+			<tr>
+				<td>{{key}}</td>
+				{% for k, v in value.items %}
+					<td>{{v}}</td>
+				{% endfor %}
+			</tr>
+			{% endfor %}	
+		</tbody>
+</table>
+</div>

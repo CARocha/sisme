@@ -174,13 +174,19 @@ def impulsando_politicas_publicas(request):
 def cometario_informe(request):
     informes = _query_set_filtrado(request)
     tabla_cometario_org = {}
+    tabla_impulsando_por_org = {}
 
     for org in Organizacion.objects.values_list('nombre_corto', flat=True).order_by('nombre_corto'):
         tabla_cometario_org[org] = {}
+        tabla_impulsando_por_org[org] = {}
         for action in ACCION:
             tabla_cometario_org[org][action[1]] = AccionImplementada.objects.filter(informe__in=informes, \
                                                                                     informe__organizacion__nombre_corto=org, \
                                                                                     accion=action[0]).count()
+        for obj in Tema.objects.all():
+            tabla_impulsando_por_org[org][obj] = AccionImpulsada.objects.filter(informe__in=informes, \
+                                                                               informe__organizacion__nombre_corto=org, \
+                                                                               tema__id=obj.id).count()
 
     return render_to_response('contraparte/comentario_org.html',
                                RequestContext(request, locals()))
