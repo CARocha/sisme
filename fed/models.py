@@ -83,7 +83,7 @@ MODALIDAD_CHOICE = ((1, u'Apoyo programático'),
                (5, u'Acciones de emergencia'),
                (6, u'Estrategias con grupos priorizados'))
 
-COBERTURA = ((1, 'Municipal'), (2, 'Departamental'), (3, 'Nacional'))
+COBERTURA = ((1, 'Municipal'), (2, 'Departamental'), (3, 'Nacional'),(4, 'Internacional'),)
 CHOICE_ACTIVA = ((1, 'No activo'), (2, 'Activo'))
 
 class Proyecto(models.Model):    
