@@ -209,7 +209,8 @@ ACCION_POSEE_INFO = ((1, u'Talleres de formación'),
                      (4, u'Intercambios de experiencias'),
                      (5, u'Visitas de campo'),
                      (6, u'Consejería'),
-                     (7, u'Campañas educativas'))
+                     (7, u'Campañas educativas'),
+                     (8, u'Obra teatral'))
 
 TIPO_POBLACION2 = ((1, 'Mujeres'), 
                   (2, 'Hombres'), 
