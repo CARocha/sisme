@@ -150,7 +150,7 @@ class Observatorio(models.Model):
     
 #------------------------------ Resultado 1.2 --------------------------------------
 POBLACION = ((1, u'En contra de las discriminación a personas LGBT'), 
-             (2, u'En contra de la discriminación a personas discapacitadas'), 
+             (2, u'En contra de la discriminación a personas con discapacidad'), 
              (3, u'En contra de la discriminación a personas con VIH'), 
              (4, u'En contra de la discriminación por etnias'),
      	     (5, u'En contra de la discriminación a la mujer'))
@@ -174,7 +174,7 @@ class DemandaJusticia(models.Model):
         verbose_name_plural = u'Demandas de Justicia'
     
 DENUNCIAS = ((1, u'Denuncias realizadas'), (2, u'Atendidas por las instancias correspondientes'), (3, u'Denuncias divulgadas'))
-TIPO_POBLACION = ((1, u'LGBT'), (2, u'Discapacitados/as'), (3, u'VIH'), (4, u'Étnica e indígena'))
+TIPO_POBLACION = ((1, u'LGBT'), (2, u'Con discapacidad'), (3, u'VIH'), (4, u'Étnica e indígena'))
 
 class InstanciaEstado(models.Model):
     nombre = models.CharField(max_length=200)
@@ -214,7 +214,7 @@ ACCION_POSEE_INFO = ((1, u'Talleres de formación'),
 TIPO_POBLACION2 = ((1, 'Mujeres'), 
                   (2, 'Hombres'), 
                   (3, u'LGBT'), 
-                  (4, u'Discapacitados/as'), 
+                  (4, u'Con discapacidad'), 
                   (5, u'VIH'), 
                   (6, u'Étnica e indígena'))
 
